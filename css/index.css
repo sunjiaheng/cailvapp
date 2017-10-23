@@ -1,0 +1,153 @@
+.home { height: 100%; background: url(../image/homeBg.jpg) no-repeat; background-size: 100% 100%; z-index: 10; }
+.home .header2 { height: 40px; line-height: 40px; background: #333; position: relative; }
+.home .header2 h2 { text-align: center; color: #f8f9f5; font-size: 16px; }
+.home .header2 a { position: absolute; right: 20px; top: 0; color: white; font-size: 20px; }
+.home .header2 span { position: absolute; left: 20px; top: 0; color: white; font-size: 16px; }
+.home .main { width: 90%; margin: 0 auto; display: flex; justify-content: space-between; margin-top: 30px; }
+.home .main .wode1, .home .main .shenpi1 { background: #9edacb; }
+.home .main div { width: 45%; background: #eff8fd; text-align: center; display: block; border-radius: 5px; }
+.home .main div i { font-size: 50px; color: #5cadec; position: relative; display: block; margin-top: 30px; }
+.home .main div i .circle { display: none; width: 26px; height: 26px; text-align: center; line-height: 26px; border-radius: 50%; background: red; position: absolute; left: 50%; margin-left: 12px; top: -12px; font-size: 16px; color: white; }
+.home .main div span { height: 50px; line-height: 50px; text-align: center; display: block; color: black; }
+
+.login { height: 100%; background: #f2f2f2; }
+.login .main input { height: 40px; line-height: 40px; border: 1px solid #d1d1d1; outline: #d1d1d1; width: 100%; font-size: 18px; margin-top: 15px; color: black; text-indent: 10px; }
+.login .main button { width: 100%; height: 54px; border: none; background: #5cadec; border-radius: 27px; font-size: 20px; color: #f1f6fb; margin-top: 15px; outline: none; }
+.login .main p { text-align: right; margin-top: 15px; font-size: 16px; }
+
+.PhoneCheck { height: 100%; background: #f2f2f2; }
+.PhoneCheck .main .tel { display: flex; width: 100%; margin-top: 15px; }
+.PhoneCheck .main .tel input { height: 40px; line-height: 40px; border: 1px solid #d1d1d1; outline: #d1d1d1; width: 100%; font-size: 18px; color: black; text-indent: 10px; flex: 1; }
+.PhoneCheck .main .tel button { width: 100px; height: 40px; line-height: 40px; border: none; background: #5cadec; border: 1px solid #d1d1d1; outline: #d1d1d1; font-size: 16px; color: #f1f6fb; border-radius: 5px; margin-left: 10px; margin-top: 2px; }
+.PhoneCheck .main .tel .send2 { background: #bdc7c6; width: 100px; height: 40px; line-height: 40px; border: none; border: 1px solid #d1d1d1; outline: #d1d1d1; font-size: 16px; color: #f1f6fb; border-radius: 5px; margin-left: 10px; margin-top: 2px; }
+.PhoneCheck .main .textnum { height: 40px; line-height: 40px; border: 1px solid #d1d1d1; outline: #d1d1d1; width: 100%; font-size: 18px; margin-top: 15px; color: black; text-indent: 10px; }
+.PhoneCheck .main .test { width: 100%; height: 54px; border: none; outline: none; background: #5cadec; border-radius: 27px; font-size: 20px; color: #f1f6fb; margin-top: 15px; }
+
+.ResetPassword { height: 100%; background: #f2f2f2; }
+.ResetPassword .main input { height: 40px; line-height: 40px; border: 1px solid #d1d1d1; outline: #d1d1d1; width: 100%; font-size: 18px; margin-top: 15px; color: black; text-indent: 10px; }
+.ResetPassword .main button { width: 100%; height: 54px; border: none; background: #5cadec; border-radius: 27px; font-size: 20px; color: #f1f6fb; margin-top: 15px; outline: none; }
+
+.TravelApply, .details, .details2 { height: 100%; background: #f2f2f2; }
+.TravelApply .bort, .details .bort, .details2 .bort { border-top: 1px solid #ccc; }
+.TravelApply .applyname, .details .applyname, .details2 .applyname { background: white; display: flex; align-items: center; border-bottom: 1px solid #ccc; height: 60px; }
+.TravelApply .applyname .left, .details .applyname .left, .details2 .applyname .left { width: 120px; padding-left: 15px; }
+.TravelApply .applyname .right, .details .applyname .right, .details2 .applyname .right { flex: 1; }
+.TravelApply .div2, .details .div2, .details2 .div2 { height: 30px !important; line-height: 30px !important; min-height: 30px !important; margin-top: 30px; }
+.TravelApply .travelpersoninfo, .details .travelpersoninfo, .details2 .travelpersoninfo { background: white; }
+.TravelApply .travelpersoninfo .div1, .details .travelpersoninfo .div1, .details2 .travelpersoninfo .div1 { height: 30px; line-height: 30px; }
+.TravelApply .travelpersoninfo > div, .details .travelpersoninfo > div, .details2 .travelpersoninfo > div { display: flex; min-height: 50px; line-height: 50px; justify-content: space-between; border-bottom: 1px solid #ccc; }
+.TravelApply .travelpersoninfo > div .left, .details .travelpersoninfo > div .left, .details2 .travelpersoninfo > div .left { width: 120px; padding-left: 15px; }
+.TravelApply .travelpersoninfo > div .right, .details .travelpersoninfo > div .right, .details2 .travelpersoninfo > div .right { flex: 1; padding-right: 15px; display: flex; }
+.TravelApply .travelpersoninfo > div .right input, .details .travelpersoninfo > div .right input, .details2 .travelpersoninfo > div .right input { border: 1px solid #ccc; outline: none; margin-top: 5px; height: 35px; text-indent: 5px; flex: 1; }
+.TravelApply .travelpersoninfo > div label, .details .travelpersoninfo > div label, .details2 .travelpersoninfo > div label { width: 100px; }
+.TravelApply .travelinfo, .details .travelinfo, .details2 .travelinfo { background: white; }
+.TravelApply .travelinfo .div1, .details .travelinfo .div1, .details2 .travelinfo .div1 { height: 30px; line-height: 30px; }
+.TravelApply .travelinfo > div, .details .travelinfo > div, .details2 .travelinfo > div { display: flex; height: 50px; line-height: 50px; justify-content: space-between; border-bottom: 1px solid #ccc; }
+.TravelApply .travelinfo > div .left, .details .travelinfo > div .left, .details2 .travelinfo > div .left { width: 120px; padding-left: 15px; }
+.TravelApply .travelinfo > div .right, .details .travelinfo > div .right, .details2 .travelinfo > div .right { flex: 1; padding-right: 15px; display: flex; }
+.TravelApply .travelinfo > div .right input, .details .travelinfo > div .right input, .details2 .travelinfo > div .right input { border: 1px solid #ccc; outline: none; margin-top: 5px; height: 35px; text-indent: 5px; flex: 1; }
+.TravelApply .btn, .details .btn, .details2 .btn { width: 90%; margin: 15px auto 0; display: block; height: 54px; border: none; background: #5cadec; border-radius: 27px; font-size: 20px; color: #f1f6fb; outline: none; }
+.TravelApply .hotel, .TravelApply .airTicket, .TravelApply .car, .details .hotel, .details .airTicket, .details .car, .details2 .hotel, .details2 .airTicket, .details2 .car { background: white; }
+.TravelApply .hotel h4, .TravelApply .airTicket h4, .TravelApply .car h4, .details .hotel h4, .details .airTicket h4, .details .car h4, .details2 .hotel h4, .details2 .airTicket h4, .details2 .car h4 { height: 30px; line-height: 30px; padding-left: 15px; border-bottom: 1px solid #ccc; }
+.TravelApply .hotel h4 span, .TravelApply .airTicket h4 span, .TravelApply .car h4 span, .details .hotel h4 span, .details .airTicket h4 span, .details .car h4 span, .details2 .hotel h4 span, .details2 .airTicket h4 span, .details2 .car h4 span { padding-left: 5px; }
+.TravelApply .hotel .info, .TravelApply .airTicket .info, .TravelApply .car .info, .details .hotel .info, .details .airTicket .info, .details .car .info, .details2 .hotel .info, .details2 .airTicket .info, .details2 .car .info { border-bottom: 1px solid #ccc; padding-left: 15px; padding-right: 10px; }
+.TravelApply .hotel .info h5, .TravelApply .airTicket .info h5, .TravelApply .car .info h5, .details .hotel .info h5, .details .airTicket .info h5, .details .car .info h5, .details2 .hotel .info h5, .details2 .airTicket .info h5, .details2 .car .info h5 { height: 50px; line-height: 50px; font-size: 20px; }
+.TravelApply .hotel .info p, .TravelApply .airTicket .info p, .TravelApply .car .info p, .details .hotel .info p, .details .airTicket .info p, .details .car .info p, .details2 .hotel .info p, .details2 .airTicket .info p, .details2 .car .info p { height: 40px; line-height: 40px; font-size: 16px; }
+.TravelApply .hotel .info .moreInfo, .TravelApply .airTicket .info .moreInfo, .TravelApply .car .info .moreInfo, .details .hotel .info .moreInfo, .details .airTicket .info .moreInfo, .details .car .info .moreInfo, .details2 .hotel .info .moreInfo, .details2 .airTicket .info .moreInfo, .details2 .car .info .moreInfo { display: flex; justify-content: space-between; height: 40px; line-height: 40px; }
+.TravelApply .moreBtn, .details .moreBtn, .details2 .moreBtn { display: flex; justify-content: space-around; }
+.TravelApply .moreBtn button, .details .moreBtn button, .details2 .moreBtn button { height: 50px; width: 40%; border-radius: 25px; border: none; background: #5cadec; border-radius: 27px; font-size: 18px; color: #f1f6fb; outline: none; }
+.TravelApply .moreBtn a, .details .moreBtn a, .details2 .moreBtn a { height: 50px; line-height: 50px; text-align: center; width: 40%; border-radius: 25px; background: #00cc99; border-radius: 27px; font-size: 18px; color: #f1f6fb; }
+
+.user { height: 100%; background: #f2f2f2; }
+.user .bort { border-top: 1px solid #ccc; }
+.user .top { min-height: 65px; background: white; display: flex; align-items: center; padding: 5px 0; border-bottom: 1px solid #ccc; }
+.user .top .pic { width: 15%; overflow: hidden; border-radius: 50%; margin-left: 15px; }
+.user .top .pic img { width: 100%; display: block; }
+.user .top .name { flex: 1; text-align: right; padding-right: 20px; }
+.user .center { background: white; display: flex; align-items: center; height: 50px; border-bottom: 1px solid #ccc; font-size: 16px; }
+.user .center .left { width: 100px; padding-left: 15px; }
+.user .center .right { flex: 1; text-align: right; padding-right: 15px; }
+.user .btn { width: 90%; margin: 15px auto 0; display: block; height: 54px; border: none; background: #5cadec; border-radius: 27px; font-size: 20px; color: #f1f6fb; outline: none; }
+
+.ExpenseApply { height: 100%; background: #f2f2f2; }
+.ExpenseApply .title { height: 30px; line-height: 30px; text-indent: 10px; background: white; }
+.ExpenseApply .title i { font-size: 20px; padding-right: 5px; }
+.ExpenseApply .list { background: white; }
+.ExpenseApply .list li { border-top: 1px solid #ccc; display: flex; align-items: center; }
+.ExpenseApply .list li .left { flex: 1; padding-left: 15px; }
+.ExpenseApply .list li .left .place { height: 40px; line-height: 40px; font-size: 20px; }
+.ExpenseApply .list li .left .time { height: 20px; line-height: 20px; padding-bottom: 10px; font-size: 16px; }
+.ExpenseApply .list li .right { width: 50px; padding-right: 15px; }
+.ExpenseApply .list li .right i { font-size: 40px; }
+.ExpenseApply .list li .right .icon-weixuanzhong { position: relative; top: 3px; }
+.ExpenseApply button { width: 90%; margin: 15px auto; display: block; height: 54px; border: none; background: #5cadec; border-radius: 27px; font-size: 20px; color: #f1f6fb; outline: none; }
+
+.MyApply, .MyRatify { height: 100%; background: #f2f2f2; }
+.MyApply .title, .MyRatify .title { height: 50px; display: flex; align-items: center; border-bottom: 1px solid #ccc; }
+.MyApply .title li, .MyRatify .title li { width: 50%; text-align: center; }
+.MyApply .title li:nth-child(1), .MyRatify .title li:nth-child(1) { border-right: 1px solid #ccc; }
+.MyApply .title .active, .MyRatify .title .active { color: #5cadec; }
+.MyApply .box .list1, .MyApply .box .list2, .MyRatify .box .list1, .MyRatify .box .list2 { display: none; }
+.MyApply .box .list1 li, .MyApply .box .list2 li, .MyRatify .box .list1 li, .MyRatify .box .list2 li { display: flex; align-items: center; border-bottom: 1px solid #ccc; }
+.MyApply .box .list1 li .left, .MyApply .box .list2 li .left, .MyRatify .box .list1 li .left, .MyRatify .box .list2 li .left { padding-left: 15px; flex: 1; font-size: 14px; }
+.MyApply .box .list1 li .left .people, .MyApply .box .list2 li .left .people, .MyRatify .box .list1 li .left .people, .MyRatify .box .list2 li .left .people { height: 40px; line-height: 40px; width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.MyApply .box .list1 li .left .info, .MyApply .box .list2 li .left .info, .MyRatify .box .list1 li .left .info, .MyRatify .box .list2 li .left .info { display: flex; justify-content: space-between; height: 30px; line-height: 30px; }
+.MyApply .box .list1 li .left .info .state, .MyApply .box .list2 li .left .info .state, .MyRatify .box .list1 li .left .info .state, .MyRatify .box .list2 li .left .info .state { color: #5cadec; }
+.MyApply .box .list1 li .left .info .over, .MyApply .box .list2 li .left .info .over, .MyRatify .box .list1 li .left .info .over, .MyRatify .box .list2 li .left .info .over { color: black; }
+.MyApply .box .list1 li .right, .MyApply .box .list2 li .right, .MyRatify .box .list1 li .right, .MyRatify .box .list2 li .right { padding-right: 10px; width: 30px; text-align: center; }
+.MyApply .box .list1 li .right i, .MyApply .box .list2 li .right i, .MyRatify .box .list1 li .right i, .MyRatify .box .list2 li .right i { font-size: 24px; }
+.MyApply .box .active, .MyRatify .box .active { display: block; }
+
+.TravelApply, .details, .details2 { height: 100%; background: #f2f2f2; overflow: auto; }
+.TravelApply .bort, .details .bort, .details2 .bort { border-top: 1px solid #ccc; }
+.TravelApply .applyname, .details .applyname, .details2 .applyname { background: white; display: flex; align-items: center; border-bottom: 1px solid #ccc; height: 60px; }
+.TravelApply .applyname .left, .details .applyname .left, .details2 .applyname .left { width: 120px; padding-left: 15px; }
+.TravelApply .applyname .right, .details .applyname .right, .details2 .applyname .right { flex: 1; }
+.TravelApply .travelpersoninfo, .details .travelpersoninfo, .details2 .travelpersoninfo { background: white; }
+.TravelApply .travelpersoninfo .div1, .details .travelpersoninfo .div1, .details2 .travelpersoninfo .div1 { height: 30px; line-height: 30px; }
+.TravelApply .travelpersoninfo > div, .details .travelpersoninfo > div, .details2 .travelpersoninfo > div { display: flex; align-items: center; padding: 4px 0; justify-content: space-between; border-bottom: 1px solid #ccc; }
+.TravelApply .travelpersoninfo > div .left, .details .travelpersoninfo > div .left, .details2 .travelpersoninfo > div .left { width: 150px; font-size: 16px; padding-left: 15px; }
+.TravelApply .travelpersoninfo > div div.right, .details .travelpersoninfo > div div.right, .details2 .travelpersoninfo > div div.right { min-height: 50px; }
+.TravelApply .travelpersoninfo > div .right, .details .travelpersoninfo > div .right, .details2 .travelpersoninfo > div .right { flex: 1; padding-right: 15px; display: flex; flex-wrap: wrap; align-items: center; }
+.TravelApply .travelpersoninfo > div .right > label, .details .travelpersoninfo > div .right > label, .details2 .travelpersoninfo > div .right > label { display: flex; align-items: center; }
+.TravelApply .travelpersoninfo > div .right input, .details .travelpersoninfo > div .right input, .details2 .travelpersoninfo > div .right input { border: 1px solid #ccc; outline: none; margin-top: 5px; height: 35px; text-indent: 5px; flex: 1; font-size: 14px; }
+.TravelApply .travelpersoninfo > div .right .disabled, .details .travelpersoninfo > div .right .disabled, .details2 .travelpersoninfo > div .right .disabled { background: #ccc; }
+.TravelApply .travelpersoninfo > div .right input[type="radio"], .details .travelpersoninfo > div .right input[type="radio"], .details2 .travelpersoninfo > div .right input[type="radio"] { width: 20px; height: 20px; margin: 10px 5px 10px 10px; display: inline-block; }
+.TravelApply .travelpersoninfo > div .right input[type="checkbox"], .details .travelpersoninfo > div .right input[type="checkbox"], .details2 .travelpersoninfo > div .right input[type="checkbox"] { width: 20px; height: 20px; margin: 10px 5px 10px 10px; display: inline-block; }
+.TravelApply .travelpersoninfo > div .right textarea, .details .travelpersoninfo > div .right textarea, .details2 .travelpersoninfo > div .right textarea { border: 1px solid #ccc; outline: none; margin-top: 5px; height: 35px; text-indent: 5px; flex: 1; }
+.TravelApply .travelpersoninfo > div .right div, .details .travelpersoninfo > div .right div, .details2 .travelpersoninfo > div .right div { border: 1px solid #ccc; outline: none; margin-top: 5px; height: 35px; text-indent: 5px; flex: 1; }
+.TravelApply .travelpersoninfo > div .right span, .details .travelpersoninfo > div .right span, .details2 .travelpersoninfo > div .right span { display: inline-block; padding: 3px 5px 3px 5px; margin: 3px 0 3px 5px; position: relative; height: 20px; line-height: 20px; color: #333; cursor: default; border: 1px solid #aaaaaa; border-radius: 3px; background-image: linear-gradient(to bottom, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%); }
+.TravelApply .travelpersoninfo > div .right span i, .details .travelpersoninfo > div .right span i, .details2 .travelpersoninfo > div .right span i { font-size: 12px; padding-right: 3px; }
+.TravelApply .travelpersoninfo > div > label, .details .travelpersoninfo > div > label, .details2 .travelpersoninfo > div > label { width: 100px; }
+.TravelApply .travelinfo, .details .travelinfo, .details2 .travelinfo { background: white; }
+.TravelApply .travelinfo .div1, .details .travelinfo .div1, .details2 .travelinfo .div1 { height: 30px; line-height: 30px; }
+.TravelApply .travelinfo > div, .details .travelinfo > div, .details2 .travelinfo > div { display: flex; height: 50px; line-height: 50px; justify-content: space-between; border-bottom: 1px solid #ccc; }
+.TravelApply .travelinfo > div .left, .details .travelinfo > div .left, .details2 .travelinfo > div .left { width: 120px; padding-left: 15px; }
+.TravelApply .travelinfo > div .right, .details .travelinfo > div .right, .details2 .travelinfo > div .right { flex: 1; padding-right: 15px; display: flex; position: relative; }
+.TravelApply .travelinfo > div .right input, .details .travelinfo > div .right input, .details2 .travelinfo > div .right input { border: 1px solid #ccc; outline: none; margin-top: 5px; height: 35px; text-indent: 5px; flex: 1; }
+.TravelApply .travelinfo > div .right i, .details .travelinfo > div .right i, .details2 .travelinfo > div .right i { position: absolute; right: 30px; font-size: 22px; }
+.TravelApply .btn, .details .btn, .details2 .btn { width: 90%; margin: 15px auto 15px; display: block; height: 54px; border: none; background: #5cadec; border-radius: 27px; font-size: 20px; color: #f1f6fb; outline: none; }
+.TravelApply .hotel, .TravelApply .airTicket, .TravelApply .car, .details .hotel, .details .airTicket, .details .car, .details2 .hotel, .details2 .airTicket, .details2 .car { background: white; }
+.TravelApply .hotel h4, .TravelApply .airTicket h4, .TravelApply .car h4, .details .hotel h4, .details .airTicket h4, .details .car h4, .details2 .hotel h4, .details2 .airTicket h4, .details2 .car h4 { height: 30px; line-height: 30px; padding-left: 15px; border-bottom: 1px solid #ccc; }
+.TravelApply .hotel h4 span, .TravelApply .airTicket h4 span, .TravelApply .car h4 span, .details .hotel h4 span, .details .airTicket h4 span, .details .car h4 span, .details2 .hotel h4 span, .details2 .airTicket h4 span, .details2 .car h4 span { padding-left: 5px; }
+.TravelApply .hotel .info, .TravelApply .airTicket .info, .TravelApply .car .info, .details .hotel .info, .details .airTicket .info, .details .car .info, .details2 .hotel .info, .details2 .airTicket .info, .details2 .car .info { border-bottom: 1px solid #ccc; padding-left: 15px; padding-right: 10px; }
+.TravelApply .hotel .info h5, .TravelApply .airTicket .info h5, .TravelApply .car .info h5, .details .hotel .info h5, .details .airTicket .info h5, .details .car .info h5, .details2 .hotel .info h5, .details2 .airTicket .info h5, .details2 .car .info h5 { height: 50px; line-height: 50px; font-size: 20px; }
+.TravelApply .hotel .info p, .TravelApply .airTicket .info p, .TravelApply .car .info p, .details .hotel .info p, .details .airTicket .info p, .details .car .info p, .details2 .hotel .info p, .details2 .airTicket .info p, .details2 .car .info p { height: 40px; line-height: 40px; font-size: 16px; }
+.TravelApply .hotel .info .moreInfo, .TravelApply .airTicket .info .moreInfo, .TravelApply .car .info .moreInfo, .details .hotel .info .moreInfo, .details .airTicket .info .moreInfo, .details .car .info .moreInfo, .details2 .hotel .info .moreInfo, .details2 .airTicket .info .moreInfo, .details2 .car .info .moreInfo { display: flex; justify-content: space-between; height: 40px; line-height: 40px; }
+.TravelApply .moreBtn, .details .moreBtn, .details2 .moreBtn { display: flex; justify-content: space-around; }
+.TravelApply .moreBtn button, .details .moreBtn button, .details2 .moreBtn button { height: 50px; width: 40%; border-radius: 25px; border: none; background: #5cadec; border-radius: 27px; font-size: 18px; color: #f1f6fb; outline: none; }
+.TravelApply .moreBtn a, .details .moreBtn a, .details2 .moreBtn a { height: 50px; line-height: 50px; text-align: center; width: 40%; border-radius: 25px; background: #00cc99; border-radius: 27px; font-size: 18px; color: #f1f6fb; }
+
+.selecta, .chucaishiyouSelect, .shiList, .shengList { height: 100%; background: #f2f2f2; }
+.selecta ul li, .chucaishiyouSelect ul li, .shiList ul li, .shengList ul li { height: 40px; line-height: 40px; font-size: 20px; text-indent: 15px; border-bottom: 1px solid #ccc; }
+
+.selectb, .MultipleSelect2c { height: 100%; background: #f2f2f2; }
+.selectb .search, .MultipleSelect2c .search { margin-top: 15px; display: flex; align-items: center; margin-bottom: 15px; }
+.selectb .search span, .MultipleSelect2c .search span { width: 50px; padding-left: 15px; }
+.selectb .search input, .MultipleSelect2c .search input { border: 1px solid #ccc; outline: none; margin-top: 5px; height: 35px; text-indent: 5px; flex: 1; margin-right: 15px; background: #f2f2f2; }
+.selectb ul li:nth-child(1), .MultipleSelect2c ul li:nth-child(1) { border-top: 1px solid #ccc; }
+.selectb ul li, .MultipleSelect2c ul li { height: 40px; line-height: 40px; font-size: 20px; text-indent: 15px; border-bottom: 1px solid #ccc; }
+
+.loading { z-index: 100; display: none; }
+
+/*# sourceMappingURL=index.css.map */

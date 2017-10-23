@@ -1,0 +1,198 @@
+html, body {
+  height: 100%;
+  background: #f2f2f2;
+}
+
+.bort {
+  border-top: 1px solid #ccc;
+}
+
+.applyname {
+  background: white;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  height: 60px;
+}
+.applyname .left {
+  width: 120px;
+  padding-left: 15px;
+}
+.applyname .right {
+  flex: 1;
+}
+
+.travelpersoninfo {
+  background: white;
+}
+.travelpersoninfo .div1 {
+  height: 30px;
+  line-height: 30px;
+}
+.travelpersoninfo > div {
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+}
+.travelpersoninfo > div .left {
+  width: 120px;
+  padding-left: 15px;
+}
+.travelpersoninfo > div .right {
+  flex: 1;
+  padding-right: 15px;
+  display: flex;
+}
+.travelpersoninfo > div .right > label {
+  display: flex;
+  align-items: center;
+}
+.travelpersoninfo > div .right input {
+  border: 1px solid #ccc;
+  outline: none;
+  margin-top: 5px;
+  height: 35px;
+  text-indent: 5px;
+  flex: 1;
+}
+.travelpersoninfo > div .right input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  margin: 10px 5px 10px 10px;
+  display: inline-block;
+}
+.travelpersoninfo > div .right input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 10px 5px 10px 10px;
+  display: inline-block;
+}
+.travelpersoninfo > div .right textarea {
+  border: 1px solid #ccc;
+  outline: none;
+  margin-top: 5px;
+  height: 35px;
+  text-indent: 5px;
+  flex: 1;
+}
+.travelpersoninfo > div .right div {
+  border: 1px solid #ccc;
+  outline: none;
+  margin-top: 5px;
+  height: 35px;
+  text-indent: 5px;
+  flex: 1;
+}
+.travelpersoninfo > div > label {
+  width: 100px;
+}
+
+.travelinfo {
+  background: white;
+}
+.travelinfo .div1 {
+  height: 30px;
+  line-height: 30px;
+}
+.travelinfo > div {
+  display: flex;
+  height: 50px;
+  line-height: 50px;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+}
+.travelinfo > div .left {
+  width: 120px;
+  padding-left: 15px;
+}
+.travelinfo > div .right {
+  flex: 1;
+  padding-right: 15px;
+  display: flex;
+}
+.travelinfo > div .right input {
+  border: 1px solid #ccc;
+  outline: none;
+  margin-top: 5px;
+  height: 35px;
+  text-indent: 5px;
+  flex: 1;
+}
+
+.btn {
+  width: 90%;
+  margin: 15px auto 0;
+  display: block;
+  height: 54px;
+  border: none;
+  background: #5cadec;
+  border-radius: 27px;
+  font-size: 20px;
+  color: #f1f6fb;
+  outline: none;
+}
+
+.hotel, .airTicket, .car {
+  background: white;
+}
+.hotel h4, .airTicket h4, .car h4 {
+  height: 30px;
+  line-height: 30px;
+  padding-left: 15px;
+  border-bottom: 1px solid #ccc;
+}
+.hotel h4 span, .airTicket h4 span, .car h4 span {
+  padding-left: 5px;
+}
+.hotel .info, .airTicket .info, .car .info {
+  border-bottom: 1px solid #ccc;
+  padding-left: 15px;
+  padding-right: 10px;
+}
+.hotel .info h5, .airTicket .info h5, .car .info h5 {
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+}
+.hotel .info p, .airTicket .info p, .car .info p {
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+}
+.hotel .info .moreInfo, .airTicket .info .moreInfo, .car .info .moreInfo {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  line-height: 40px;
+}
+
+.moreBtn {
+  display: flex;
+  justify-content: space-around;
+}
+.moreBtn button {
+  height: 50px;
+  width: 40%;
+  border-radius: 25px;
+  border: none;
+  background: #5cadec;
+  border-radius: 27px;
+  font-size: 18px;
+  color: #f1f6fb;
+  outline: none;
+}
+.moreBtn a {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  width: 40%;
+  border-radius: 25px;
+  background: #00cc99;
+  border-radius: 27px;
+  font-size: 18px;
+  color: #f1f6fb;
+}
+
+/*# sourceMappingURL=TravelApply.css.map */

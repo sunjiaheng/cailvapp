@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Product App</title>
+</head>
+<body>
+
+    <div>
+        <h2>All Products</h2>
+        <ul id="products" />
+    </div>
+    <div>
+        <h2>Search by ID</h2>
+        <input type="text" id="userId" size="5" />
+        <input type="text" id="Password" size="5" />
+        <input type="button" value="Login" onclick="Login();" />
+        <input type="text" id="uId" size="5" />
+        <br />
+        <input type="text" id="token" size="50" />
+        <input type="button" value="Validate" onclick="Validate();" />
+        <input type="button" value="Logout" onclick="Logout();" />
+        <br />
+        <input type="text" id="phone" size="15" />
+        <input type="button" value="Send Verify Code" onclick="SendVerifyCode();" />
+        <input type="text" id="msgID" size="15" />
+        <br />
+        <input type="text" id="verifyCode" size="15" />
+        <input type="button" value="Check" onclick="IsVailid();" />
+        <br />
+        <input type="button" value="ChangePassword" onclick="ChangePassword();" />
+        <br />
+        <input type="button" value="Test Dynatic Parameters" onclick="TestAction();" />
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        //var uri = 'http://192.168.1.202:8084/';
+        var uri = 'http://localhost:62557/';
+        
+        function Login() {
+            var id = $('#userId').val();
+            var password = $('#Password').val();
+
+            $.ajax({
+                url: uri + 'api/User/Login',
+                type: 'POST',
+                dataType: 'json',
+                data: { Id: id, Password: password },
+                success: function (data) {
+                    $('#token').val(data.Result[0]);
+                    $('#uId').val(data.Result[1].UserID);
+                    alert('OK');
+                },
+                error: function (jqXHR, textStatus, err) {
+                    alert('NG');
+                }
+            });
+        }
+
+        function Logout() {
+            var token = $('#token').val();
+
+            $.ajax({
+                url: uri + 'api/User/Logout',
+                type: 'POST',
+                dataType: 'json',
+                data: '=' + token,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic ' + token);
+                },
+                success: function (data) {
+                    $('#token').val("");
+                    alert('OK');
+                },
+                error: function (jqXHR, textStatus, err) {
+                    alert('NG');
+                }
+            })
+        }
+
+        function Validate() {
+            var token = $('#token').val();
+
+            $.ajax({
+                url: uri + 'api/User/GetUser/72',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    alert('OK');
+                },
+                error: function (jqXHR, textStatus, err) {
+                    alert('NG: ' + jqXHR.status);
+                }
+            })
+        }
+        //13912340000    1234
+        function SendVerifyCode() {
+            var token = $('#token').val();
+            var phone = $('#phone').val();
+
+            $.ajax({
+                url: uri + 'api/User/SendSMSCode?phoneNo=' + phone,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('#msgID').val(data.Result);
+                    alert('OK');
+                },
+                error: function (jqXHR, textStatus, err) {
+                    alert('NG');
+                }
+            })
+        }
+
+        function IsVailid() {
+            var token = $('#token').val();
+            var phone = $('#phone').val();
+            var msgID = $('#msgID').val();
+            var verifyCode = $('#verifyCode').val();
+
+            $.ajax({
+                url: uri + 'api/User/VerifySMSCode?phoneNo=' + phone + '&code=' + verifyCode + '&msgID=' + msgID,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('#uId').val(data.Result[0]);
+                    $('#token').val(data.Result[1]);
+                    alert('OK');
+                },
+                error: function (jqXHR, textStatus, err) {
+                    alert('NG');
+                }
+            })
+        }
+        
+        function ChangePassword() {
+            var token = $('#token').val();
+            var uId = $('#uId').val();
+            var password = $('#Password').val();
+
+            $.ajax({
+                url: uri + 'api/User/ResetPassword',
+                type: 'POST',
+                dataType: 'json',
+                data: {Id: uId, Password: password, token: token},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic ' + token);
+                },
+                success: function (data) {
+                    alert('OK');
+                },
+                error: function (jqXHR, textStatus, err) {
+                    alert('NG');
+                }
+            })
+        }
+        
+        function TestAction() {
+            var token = $('#token').val();
+            var phone = $('#phone').val();
+            var msgID = $('#msgID').val();
+            var verifyCode = $('#verifyCode').val();
+
+            $.ajax({
+                url: uri + 'api/User/TestAction',
+                type: 'POST',
+                dataType: 'json',
+                data: { token: ['token-xxxx','xxxx'], phone: 'phone-123', msgID: 'msgID-123446' },
+                success: function (data) {
+                    alert('OK');
+                },
+                error: function (jqXHR, textStatus, err) {
+                    alert('NG');
+                }
+            })
+        }
+
+    </script>
+</body>
+</html>

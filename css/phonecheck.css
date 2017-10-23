@@ -1,0 +1,52 @@
+.main .tel {
+  display: flex;
+  width: 100%;
+  margin-top: 15px;
+}
+.main .tel input {
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid #d1d1d1;
+  outline: #d1d1d1;
+  width: 100%;
+  font-size: 18px;
+  color: black;
+  text-indent: 10px;
+  flex: 1;
+}
+.main .tel button {
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  border: none;
+  background: #5cadec;
+  border: 1px solid #d1d1d1;
+  outline: #d1d1d1;
+  font-size: 16px;
+  color: #f1f6fb;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-top: 2px;
+}
+.main .textnum {
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid #d1d1d1;
+  outline: #d1d1d1;
+  width: 100%;
+  font-size: 18px;
+  margin-top: 15px;
+  color: black;
+  text-indent: 10px;
+}
+.main .test {
+  width: 100%;
+  height: 54px;
+  border: none;
+  outline: none;
+  background: #5cadec;
+  border-radius: 27px;
+  font-size: 20px;
+  color: #f1f6fb;
+  margin-top: 15px;
+}

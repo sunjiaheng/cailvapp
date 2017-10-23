@@ -1,0 +1,187 @@
+html{
+	height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+body{
+	font-family: "微软雅黑";
+	font-size: 16px;
+	height: 100%;
+	position: relative;
+}
+body>div{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index:1;
+  overflow: auto;
+}
+.header{
+	height: 40px;
+	line-height: 40px;
+	background: #333;
+	position: relative;
+}
+.header h2{
+	text-align: center;
+	color: #f8f9f5;
+	font-size: 16px;
+}
+
+.header a{
+		position:absolute;
+		left:15px;
+		top:0;
+		color:white;
+		font-size:20px;
+}
+.header span{
+		position:absolute;
+		right:15px;
+		top:0;
+		color:white;
+		font-size:20px;
+}
+
+.main{
+	/*width: 90%;*/
+	margin: 0 20px;
+}
+
+
+.mt15{
+	margin-top:15px;
+}
+.mb20{
+  margin-bottom:20px;
+}
+
+
+
+/*animate.css动画 提取  要做webkit兼容*/
+.animated {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+}
+/*webkit兼容*/
+
+@keyframes fadeInRightBig {
+  from {
+    opacity: 0;
+    transform: translate3d(2000px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+@-webkit-keyframes fadeInRightBig {
+  from {
+    opacity: 0;
+    -webkit-transform: -webkit-translate3d(2000px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+  }
+}
+
+.fadeInRightBig {
+	animation-name: fadeInRightBig;
+	-webkit-animation-name: fadeInRightBig;
+}
+
+
+@keyframes fadeInLeftBig {
+  from {
+    opacity: 0;
+    transform: translate3d(-2000px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@-webkit-keyframes fadeInLeftBig {
+  from {
+    opacity: 0;
+    -webkit-transform: -webkit-translate3d(-2000px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+  }
+}
+
+.fadeInLeftBig {
+	animation-name: fadeInLeftBig;
+    -webkit-animation-name: fadeInLeftBig;
+}
+
+
+/*loading*/
+.loader-inner{
+  height: 100%;
+  width: 100%;
+  background: rgba(242,242,242,0.7);
+}
+@-webkit-keyframes square-spin {
+  25% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(0);
+            transform: perspective(100px) rotateX(180deg) rotateY(0); }
+
+  50% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+            transform: perspective(100px) rotateX(180deg) rotateY(180deg); }
+
+  75% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(180deg);
+            transform: perspective(100px) rotateX(0) rotateY(180deg); }
+
+  100% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(0);
+            transform: perspective(100px) rotateX(0) rotateY(0); } }
+
+@keyframes square-spin {
+  25% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(0);
+            transform: perspective(100px) rotateX(180deg) rotateY(0); }
+
+  50% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+            transform: perspective(100px) rotateX(180deg) rotateY(180deg); }
+
+  75% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(180deg);
+            transform: perspective(100px) rotateX(0) rotateY(180deg); }
+
+  100% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(0);
+            transform: perspective(100px) rotateX(0) rotateY(0); } }
+
+.square-spin > div {
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  top:50%;
+  margin-top:-50px;
+  margin-left: -50px;
+  background: #5cadec;
+
+  -webkit-animation: square-spin 3s 0s cubic-bezier(.09, .57, .49, .9) infinite;
+          animation: square-spin 3s 0s cubic-bezier(.09, .57, .49, .9) infinite; 
+}

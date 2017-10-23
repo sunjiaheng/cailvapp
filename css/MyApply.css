@@ -1,0 +1,57 @@
+.title {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+.title li {
+  width: 50%;
+  text-align: center;
+}
+.title li:nth-child(1) {
+  border-right: 1px solid #ccc;
+}
+.title .active {
+  color: #5cadec;
+}
+
+.box .list1, .box .list2 {
+  display: none;
+}
+.box .list1 li, .box .list2 li {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+.box .list1 li .left, .box .list2 li .left {
+  padding-left: 15px;
+  flex: 1;
+  font-size: 14px;
+}
+.box .list1 li .left .people, .box .list2 li .left .people {
+  height: 40px;
+  line-height: 40px;
+}
+.box .list1 li .left .info, .box .list2 li .left .info {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  line-height: 30px;
+}
+.box .list1 li .left .info .state, .box .list2 li .left .info .state {
+  color: #5cadec;
+}
+.box .list1 li .left .info .over, .box .list2 li .left .info .over {
+  color: black;
+}
+.box .list1 li .right, .box .list2 li .right {
+  padding-right: 10px;
+  width: 30px;
+  text-align: center;
+}
+.box .list1 li .right i, .box .list2 li .right i {
+  font-size: 24px;
+}
+.box .active {
+  display: block;
+}

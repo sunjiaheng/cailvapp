@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>差旅APP</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=0">
+	<!-- <link rel="stylesheet" href="css/animate.css"> -->
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/public.css">
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="font/iconfont.css">
+	<script src="js/jquery-1.12.4.js"></script>
+	<script src="js/index.js"></script>
+	<script src="js/shengshi.js"></script>
+	<script src="js/template.js"></script>
+</head>
+<body>
+	<div class="home">
+		<div class="header2">
+			<span>ITEP APP</span>
+			<h2>智能商旅平台</h2>
+			<a class="iconfont icon-ren"></a>
+		</div>
+		<div class="main">
+			<div class="chucai ">
+				<i class="iconfont icon-feiji"></i>
+				<span>出差申请</span>
+			</div>
+			<div class="baoxiao ">
+				<i class="iconfont icon-qian"></i>
+				<span>报销申请</span>
+			</div>
+		</div>
+		<div class="main">
+			<div class="wode ">
+				<i class="iconfont icon-liebiao">
+					<div class="circle">1</div>
+				</i>
+				<span>我的申请</span>
+			</div>
+			<div class="shenpi ">
+				<i class="iconfont icon-shenpi">
+					<div class="circle">12</div>
+				</i>
+				<span>我的审批</span>
+			</div>
+		</div>
+	</div>
+	<div class="login">
+		<div class="header">
+			<h2>登录</h2>
+		</div>
+		<div class="main">
+			<input type="tel" placeholder="请输入手机号" value="18041126571">
+			<input type="password" placeholder="请输入密码" value="123456">
+			<button>登录</button>
+			<p>忘记密码</p>
+		</div>
+	</div>
+	<div class="user">
+	</div>
+	<script type="text/html" id="user">
+		<div class="header">
+			<a class="iconfont icon-houtui"></a>
+			<h2>用户中心</h2>
+		</div>
+		<div class="box">
+			<div class="top ">
+			
+				<div class="pic">
+					<img src="{{pic}}" alt="">
+					
+				</div>
+				<div class="name">{{name}}</div>
+			</div>
+			<div class="center mt15 bort">
+				<div class="left">员工号</div>
+				<div class="right">{{yuangonghao}}</div>
+			</div>
+			<div class="center">
+				<div class="left">职位</div>
+				<div class="right">{{zhiwei}}</div>
+			</div>
+			<div class="center">
+				<div class="left">部门</div>
+				<div class="right">{{bumen}}</div>
+			</div>
+			<div class="center mt15 bort chongzhimima">
+				<div class="left">重置密码</div>
+				<div class="right iconfont icon-qianjin-copy"></div>
+			</div>
+			<button class="btn ">退出登录</button>
+		</div>
+	</script>
+	<div class="ResetPassword">
+		<div class="header">
+			<a class="iconfont icon-houtui"></a>
+			<h2>重置密码</h2>
+		</div>
+		<div class="main">
+			<input type="password" placeholder="请输入新密码">
+			<input type="password" placeholder="请再次输入新密码" class="textnum">
+			<button class="test">重置</button>
+		</div>
+	</div>
+	<div class="PhoneCheck">
+		<div class="header">
+			<a class="iconfont icon-houtui"></a>
+			<h2>验证手机号</h2>
+		</div>
+		<div class="main">
+			<div class="tel">
+				<input type="tel" placeholder="请输入手机号">
+				<button class="send">发送验证码</button>
+			</div>
+			
+			<input type="text" placeholder="请输入验证码" class="textnum">
+			<button class="test">验证</button>
+		</div>
+	</div>
+	<div class="TravelApply">
+	</div>
+	<script type="text/html" id="TravelApply">
+		<div class="header">
+			<a class="iconfont icon-houtui"></a>
+			<h2>填写出差申请</h2>
+		</div>
+		<div class="box">
+			<div class="applyname">
+				<div class="left">申请人：</div>
+				<div class="right">{{TravelApplyName}}</div>
+			</div>
+			<div class="travelpersoninfo mt15" WorkFlowNodeId="{{WorkFlowNodeId}}">
+				<div class="div1 bort">
+					<div class="left">出差人员信息</div>
+					<label><input type="checkbox" name="">本人申请</label>
+				</div>
+				{{each FormBuildingdata as val key}}
+					{{if FormBuildingdata[key].ElementType == "Input"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+
+								<input type="{{FormBuildingdata[key].ElementType}}" value="{{FormBuildingdata[key].ElementValue}}" {{if FormBuildingdata[key].DataTypeDisable}}disabled class="disabled" {{/if}}>
+							</div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "PwdInput"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="password"></div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Textarea"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><textarea></textarea></div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Checkboxs"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}
+									<label><input type="checkbox">{{FormBuildingdata[key].DataTypeSoure[key2].Name}}</label>
+								{{/each}}
+							</div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Radio"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}
+									<label><input type="checkbox" name="{{FormBuildingdata[key].ElementName}}">{{FormBuildingdata[key].DataTypeSoure[key2].Name}}</label>
+								{{/each}}
+							</div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Select2"}} 
+						{{if FormBuildingdata[key].ColumnName == "Code_CCMDD"}}
+							<div class="div2 bort">
+								<div class="left">出差信息</div>
+							</div>
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"></div>
+							</div>
+						{{else if  FormBuildingdata[key].ColumnName == "Code_CCMDDS"}}
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"></div>
+							</div>
+						{{else if 1}}
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"></div>
+							</div>
+						{{/if}}
+					{{else if FormBuildingdata[key].ElementType == "Select"}}
+							{{FormBuildingdata[key].DataTypeSoure}}
+						
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"> </div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Select2"}}
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"> </div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "MultipleSelect2"}}
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"> </div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "DateBox"}} 
+						{{if FormBuildingdata[key].ColumnName == "Code_CCQSRQ"}}
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date"></div>
+							</div>
+						{{else if FormBuildingdata[key].ColumnName == "Code_CCJSRQ"}}
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date"></div>
+							</div>
+						{{/if}}
+					{{/if}}
+				{{/each}}
+			</div>	
+			<button class="btn ">提交申请</button>
+		</div>	
+	</script>
+	<div class="ExpenseApply">
+	</div>
+	<script type="text/html" id="ExpenseApply">
+		<div class="header">
+			<a class="iconfont icon-houtui"></a>
+			<h2>报销申请</h2>
+		</div>
+		<div class="title mt15 borT">
+			<i class="iconfont icon-lianjie"></i>未报销的出差记录
+		</div>
+		<ul class="list">
+			{{each ExpenseApplyDatelist as val key}}
+				<li TravelId="{{ExpenseApplyDatelist[key].Code_CCSQLC}}"  workFlowNodeId="{{ExpenseApplyDatelist[key].WorkFlowNodeId}}">
+					<div class="left">
+						<div class="place">{{ExpenseApplyDatelist[key].Code_CCMDD}}-{{ExpenseApplyDatelist[key].Code_CCMDDS}}</div>
+						<div class="time">
+							<span class="time1">{{ExpenseApplyDatelist[key].Code_CCQSRQ}}</span>/<span class="time2">{{ExpenseApplyDatelist[key].Code_CCJSRQ}}</span>
+						</div>
+					</div>
+					<div class="right">
+						<i class="iconfont icon-xuanzhong"></i>
+					</div>
+				</li>
+			{{/each}}
+		</ul>
+		<button>一键报销</button>
+	</script>
+	<div class="MyApply">
+	</div>
+	<script type="text/html" id="MyApply">
+		<div class="header">
+			<a class="iconfont icon-houtui"></a>
+			<h2>我的出差申请</h2>
+		</div>
+		<ul class="title">
+			<li class="active">待审批</li>
+			<li>已审批</li>
+		</ul>
+		<div class="box">
+			<ul class="list1 active">
+				{{each data0 as val key}}
+					<li taskId="{{data0[key].TaskId}}" workFlowNodeId="{{data0[key].WorkFlowNodeId}}" travelId="{{data0[key].Code_CCSQLC}}" BusinessId = "{{data0[key].BusinessId}}" Work_State_Code="{{data0[key].Work_State_Code}}">
+						<div class="left">
+							<div class="people">
+								<span>{{data0[key].Code_XM}}</span>(员工号:{{data0[key].Code_CCRGH}})<span>{{data0[key].Code_CCQSRQ}}</span>的出差申请
+							</div>
+							<div class="info">
+								<div class="state">{{data0[key].Work_State_Text}}</div>
+								<div class="time">申请时间:<span>{{data0[key].Code_SQRQ}}</span></div>
+							</div>
+						</div>
+						<div class="right">
+							<i class="iconfont icon-qianjin-copy"></i>
+						</div>
+					</li>
+				{{/each}}
+			</ul>
+			<ul class="list2">
+				{{each data1 as val key}}
+					<li taskId="{{data1[key].TaskId}}" workFlowNodeId="{{data1[key].WorkFlowNodeId}}" travelId="{{data1[key].Code_CCSQLC}}"  BusinessId = "{{data1[key].BusinessId}}" Work_State_Code="{{data1[key].Work_State_Code}}">
+						<div class="left">
+							<div class="people">
+								<span>{{data1[key].Code_XM}}</span>(员工号:{{data1[key].Code_CCRGH}})<span>{{data1[key].Code_CCQSRQ}}</span>的出差申请
+							</div>
+							<div class="info">
+								<div class="state">{{data1[key].Work_State_Text}}</div>
+								<div class="time">申请时间:<span>{{data1[key].Code_SQRQ}}</span></div>
+							</div>
+						</div>
+						<div class="right">
+							<i class="iconfont icon-qianjin-copy"></i>
+						</div>
+					</li>
+				{{/each}}
+			</ul>
+		</div>
+	</script>
+	<div class="details">
+	</div>
+	<script type="text/html" id="details">
+		<div class="header">
+			<a class="iconfont icon-houtui"></a>
+			<h2>出差申请详情</h2>
+		</div>
+		<div class="box">
+			<div class="applyname">
+				<div class="left">申请人：</div>
+				<div class="right">{{TravelApplyName}}</div>
+			</div>
+			<div class="travelpersoninfo mt15" WorkFlowNodeId="{{WorkFlowNodeId}}">
+				<div class="div1 bort">
+					<div class="left">出差人员信息</div>
+					
+				</div>
+				{{each FormBuildingdata as val key}}
+					{{if FormBuildingdata[key].ElementType == "Input"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								<input type="{{FormBuildingdata[key].ElementType}}" value="{{FormBuildingdata[key].ElementValue}}">
+							</div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "PwdInput"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								<input type="password" value="{{FormBuildingdata[key].ElementValue}}">
+							</div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Textarea"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><textarea>{{FormBuildingdata[key].ElementValue}}</textarea></div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Checkboxs"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}
+									<label><input type="checkbox">{{FormBuildingdata[key].DataTypeSoure[key2].Name}}</label>
+								{{/each}}
+							</div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Radio"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}
+									<label><input type="checkbox" name="{{FormBuildingdata[key].ElementName}}">{{FormBuildingdata[key].DataTypeSoure[key2].Name}}</label>
+								{{/each}}
+							</div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Select2"}} 
+						{{if FormBuildingdata[key].ColumnName == "Code_CCMDD"}}
+							<div class="div2 bort">
+								<div class="left">出差信息</div>
+							</div>
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}}</div>
+							</div>
+						{{else if  FormBuildingdata[key].ColumnName == "Code_CCMDDS"}}
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}}</div>
+							</div>
+						{{else if 1}}
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}}</div>
+							</div>
+						{{/if}}
+					{{else if FormBuildingdata[key].ElementType == "Select"}}
+							{{FormBuildingdata[key].DataTypeSoure}}
+						
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
+							<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"> {{FormBuildingdata[key].ElementValue}}</div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Select2"}}
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
+							<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}} </div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "MultipleSelect2"}}
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
+							<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}} </div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "DateBox"}} 
+						{{if FormBuildingdata[key].ColumnName == "Code_CCQSRQ"}}
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date" value="{{FormBuildingdata[key].ElementValue}}" /></div>
+							</div>
+						{{else if FormBuildingdata[key].ColumnName == "Code_CCJSRQ"}}
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date" value="{{FormBuildingdata[key].ElementValue}}" /></div>
+							</div>
+						{{/if}}
+					{{/if}}
+				{{/each}}
+			</div>
+			{{if feijidata}}
+				{{each feijidata as val key}}
+					<div class="airTicket mt15 bort">
+						<h4 class="iconfont icon-jipiao"><span>机票</span></h4>
+						<div class="info">
+							{{each feijidata[key].FormElements as val2 key2}}
+								{{if feijidata[key].FormElements[key2].ColumnName == "Code_CFJC"}}
+								<h5>
+									{{feijidata[key].FormElements[key2].DataTypeSoure.length?feijidata[key].FormElements[key2].DataTypeSoure[feijidata[key].FormElements[key2].ElementValue]:feijidata[key].FormElements[key2].ElementValue}}
+									-
+								{{/if}}
+								
+								{{if feijidata[key].FormElements[key2].ColumnName == "Code_DDJC"}}
+									{{feijidata[key].FormElements[key2].DataTypeSoure.length?feijidata[key].FormElements[key2].DataTypeSoure[feijidata[key].FormElements[key2].ElementValue]:feijidata[key].FormElements[key2].ElementValue}}
+								</h5>
+								{{/if}}
+						
+								{{if feijidata[key].FormElements[key2].ColumnName == "Code_CFSJ"}}
+								<p class="time">
+									<span>
+										{{feijidata[key].FormElements[key2].DataTypeSoure.length?feijidata[key].FormElements[key2].DataTypeSoure[feijidata[key].FormElements[key2].ElementValue]:feijidata[key].FormElements[key2].ElementValue}}
+									</span>
+								</p>
+								{{/if}}
+								{{if feijidata[key].FormElements[key2].ColumnName == "Code_YDHBH"}}
+									<div class="moreInfo">
+										<div class="moreInfoLeft">{{feijidata[key].FormElements[key2].DataTypeSoure.length?feijidata[key].FormElements[key2].DataTypeSoure[feijidata[key].FormElements[key2].ElementValue]:feijidata[key].FormElements[key2].ElementValue}}</div>
+								{{/if}}
+								{{if feijidata[key].FormElements[key2].ColumnName == "Code_ZCLX"}}
+										<div class="moreInfoRight">{{feijidata[key].FormElements[key2].DataTypeSoure.length?feijidata[key].FormElements[key2].DataTypeSoure[feijidata[key].FormElements[key2].ElementValue]:feijidata[key].FormElements[key2].ElementValue}}</div>
+									</div>
+								{{/if}}
+								
+							{{/each}}
+						</div>
+					</div>
+				{{/each}}
+			{{/if}}
+			{{if jiudiandata}}
+				{{each jiudiandata as val key}}
+					<div class="hotel mt15 bort">
+						<h4 class="iconfont icon-jiudian"><span>酒店</span></h4>
+						<div class="info">
+							{{each jiudiandata[key].FormElements as val2 key2}}
+								{{if jiudiandata[key].FormElements[key2].ColumnName == "Code_JDMC"}}
+									<h5>
+										{{jiudiandata[key].FormElements[key2].DataTypeSoure.length?jiudiandata[key].FormElements[key2].DataTypeSoure[jiudiandata[key].FormElements[key2].ElementValue]:jiudiandata[key].FormElements[key2].ElementValue}}
+									</h5>
+								{{/if}}
+								{{if jiudiandata[key].FormElements[key2].ColumnName == "Code_JDRZSJ"}}
+									<p class="time">
+										<span>{{jiudiandata[key].FormElements[key2].DataTypeSoure.length?jiudiandata[key].FormElements[key2].DataTypeSoure[jiudiandata[key].FormElements[key2].ElementValue]:jiudiandata[key].FormElements[key2].ElementValue}} 至
+								{{/if}}
+								{{if jiudiandata[key].FormElements[key2].ColumnName == "Code_JDLKSJ"}}
+									{{jiudiandata[key].FormElements[key2].DataTypeSoure.length?jiudiandata[key].FormElements[key2].DataTypeSoure[jiudiandata[key].FormElements[key2].ElementValue]:jiudiandata[key].FormElements[key2].ElementValue}}</span>
+									</p>
+								{{/if}}
+								{{if jiudiandata[key].FormElements[key2].ColumnName == "Code_HJSJ"}}
+									<div class="moreInfo">
+										<div class="moreInfoLeft">{{jiudiandata[key].FormElements[key2].DataTypeSoure.length?jiudiandata[key].FormElements[key2].DataTypeSoure[jiudiandata[key].FormElements[key2].ElementValue]:jiudiandata[key].FormElements[key2].ElementValue}}</div>
+								{{/if}}
+								{{if jiudiandata[key].FormElements[key2].ColumnName == "Code_FJLX"}}
+										<div class="moreInfoRight">{{jiudiandata[key].FormElements[key2].DataTypeSoure.length?jiudiandata[key].FormElements[key2].DataTypeSoure[jiudiandata[key].FormElements[key2].ElementValue]:jiudiandata[key].FormElements[key2].ElementValue}}</div>
+									</div>
+								{{/if}}	
+							{{/each}}
+							
+							
+							
+						</div>
+					</div>
+				{{/each}}
+			{{/if}}
+			{{if zhuanchedata}}
+				{{each zhuanchedata as val key}}
+					<div class="car mt15 bort">
+						<h4 class="iconfont icon-icon"><span>专车</span></h4>
+						<div class="info">
+							{{each zhuanchedata[key].FormElements as val2 key2}}
+							{{if zhuanchedata[key].FormElements[key2].ColumnName == "Code_CX"}}
+								<h5>
+									{{zhuanchedata[key].FormElements[key2].DataTypeSoure.length?zhuanchedata[key].FormElements[key2].DataTypeSoure[zhuanchedata[key].FormElements[key2].ElementValue]:zhuanchedata[key].FormElements[key2].ElementValue}}
+								</h5>
+							{{/if}}
+							{{if zhuanchedata[key].FormElements[key2].ColumnName == "Code_QSSJ"}}
+								<p class="time">
+									<span>{{zhuanchedata[key].FormElements[key2].DataTypeSoure.length?zhuanchedata[key].FormElements[key2].DataTypeSoure[zhuanchedata[key].FormElements[key2].ElementValue]:zhuanchedata[key].FormElements[key2].ElementValue}} 至
+							{{/if}}
+							{{if zhuanchedata[key].FormElements[key2].ColumnName == "Code_JSSJ"}}
+								{{zhuanchedata[key].FormElements[key2].DataTypeSoure.length?zhuanchedata[key].FormElements[key2].DataTypeSoure[zhuanchedata[key].FormElements[key2].ElementValue]:zhuanchedata[key].FormElements[key2].ElementValue}}</span>
+								</p>
+							{{/if}}
+							{{if zhuanchedata[key].FormElements[key2].ColumnName == "Code_CPH"}}
+								<div class="moreInfo">
+									<div class="moreInfoLeft">{{zhuanchedata[key].FormElements[key2].DataTypeSoure.length?zhuanchedata[key].FormElements[key2].DataTypeSoure[zhuanchedata[key].FormElements[key2].ElementValue]:zhuanchedata[key].FormElements[key2].ElementValue}}</div>
+							{{/if}}
+							{{if zhuanchedata[key].FormElements[key2].ColumnName == "Code_QCYS"}}
+									<div class="moreInfoRight">{{zhuanchedata[key].FormElements[key2].DataTypeSoure.length?zhuanchedata[key].FormElements[key2].DataTypeSoure[zhuanchedata[key].FormElements[key2].ElementValue]:zhuanchedata[key].FormElements[key2].ElementValue}}</div>
+								</div>
+							{{/if}}	
+						{{/each}}
+						</div>
+					</div>
+				{{/each}}
+			{{/if}}
+			{{if work_state_code == 4 }}
+			<div class="moreBtn mt15 mb20">
+				<button class="btn2">确认行程</button>
+				<a href="tel:13333333333">一键沟通</a>
+			</div>
+			{{else if work_state_code == 1}}
+
+			{{else}}
+			<button class="btn ">提交申请</button>
+			{{/if}}	
+			
+		</div>	
+	</script>
+	<div class="MyRatify">
+	</div>
+	<script type="text/html" id="MyRatify">
+		<div class="header">
+			<a class="iconfont icon-houtui"></a>
+			<h2>我的审批</h2>
+		</div>
+		<ul class="title">
+			<li class="active">待审批</li>
+			<li>已完结</li>
+		</ul>
+		<div class="box">
+			<ul class="list1 active">
+			{{each data0 as val key}}
+				<li taskId="{{data0[key].TaskId}}" workFlowNodeId="{{data0[key].WorkFlowNodeId}}" travelId="{{data0[key].Code_CCSQLC}}" BusinessId = "{{data0[key].BusinessId}}" Work_State_Code="{{data0[key].Work_State_Code}}">
+					<div class="left">
+						<div class="people">
+							<span>{{data0[key].Code_XM}}</span>(员工号:{{data0[key].Code_CCRGH}})<span>{{data0[key].Code_CCQSRQ}}</span>的出差申请
+						</div>
+						<div class="info">
+							<div class="state">{{data0[key].Work_State_Text}}</div>
+							<div class="time">申请时间:<span>{{data0[key].Code_SQRQ}}</span></div>
+						</div>
+					</div>
+					<div class="right">
+						<i class="iconfont icon-qianjin-copy"></i>
+					</div>
+				</li>
+			{{/each}}	
+			</ul>
+			<ul class="list2">
+				{{each data1 as val key}}
+				<li taskId="{{data1[key].TaskId}}" workFlowNodeId="{{data1[key].WorkFlowNodeId}}" travelId="{{data1[key].Code_CCSQLC}}" BusinessId = "{{data1[key].BusinessId}}" Work_State_Code="{{data1[key].Work_State_Code}}">
+					<div class="left">
+						<div class="people">
+							<span>{{data1[key].Code_XM}}</span>(员工号:{{data1[key].Code_CCRGH}})<span>{{data1[key].Code_CCQSRQ}}</span>的出差申请
+						</div>
+						<div class="info">
+							<div class="state">{{data1[key].Work_State_Text}}</div>
+							<div class="time">申请时间:<span>{{data1[key].Code_SQRQ}}</span></div>
+						</div>
+					</div>
+					<div class="right">
+						<i class="iconfont icon-qianjin-copy"></i>
+					</div>
+				</li>
+			{{/each}}
+			</ul>
+		</div>
+	</script>
+	<div class="details2">
+	</div>
+	<script type="text/html" id="details2">
+		<div class="header">
+			<a class="iconfont icon-houtui"></a>
+			<h2>我的审批详情</h2>
+		</div>
+		<div class="box">
+			<div class="applyname">
+				<div class="left">申请人：</div>
+				<div class="right">{{TravelApplyName}}</div>
+			</div>
+			<div class="travelpersoninfo mt15" WorkFlowNodeId="{{WorkFlowNodeId}}">
+				<div class="div1 bort">
+					<div class="left">出差人员信息</div>
+					
+				</div>
+				{{each FormBuildingdata as val key}}
+					{{if FormBuildingdata[key].ElementType == "Input"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								<input type="{{FormBuildingdata[key].ElementType}}" value="{{FormBuildingdata[key].ElementValue}}">
+							</div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "PwdInput"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="password" value="{{FormBuildingdata[key].ElementValue}}"></div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Textarea"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><textarea>{{FormBuildingdata[key].ElementValue}}</textarea></div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Checkboxs"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}
+									<label><input type="checkbox">{{FormBuildingdata[key].DataTypeSoure[key2].Name}}</label>
+								{{/each}}
+							</div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Radio"}} 
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
+							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}
+									<label><input type="checkbox" name="{{FormBuildingdata[key].ElementName}}">{{FormBuildingdata[key].DataTypeSoure[key2].Name}}</label>
+								{{/each}}
+							</div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Select2"}} 
+						{{if FormBuildingdata[key].ColumnName == "Code_CCMDD"}}
+							<div class="div2 bort">
+								<div class="left">出差信息</div>
+							</div>
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}}</div>
+							</div>
+						{{else if  FormBuildingdata[key].ColumnName == "Code_CCMDDS"}}
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}}</div>
+							</div>
+						{{else if 1}}
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}}</div>
+							</div>
+						{{/if}}
+					{{else if FormBuildingdata[key].ElementType == "Select"}}
+							{{FormBuildingdata[key].DataTypeSoure}}
+						
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"> {{FormBuildingdata[key].ElementValue}}</div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "Select2"}}
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}} </div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "MultipleSelect2"}}
+						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
+							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}} </div>
+						</div>
+					{{else if FormBuildingdata[key].ElementType == "DateBox"}} 
+						{{if FormBuildingdata[key].ColumnName == "Code_CCQSRQ"}}
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date" value="{{FormBuildingdata[key].ElementValue}}" /></div>
+							</div>
+						{{else if FormBuildingdata[key].ColumnName == "Code_CCJSRQ"}}
+							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
+								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
+								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date" value="{{FormBuildingdata[key].ElementValue}}" /></div>
+							</div>
+						{{/if}}
+					{{/if}}
+				{{/each}}
+			</div>	
+			<button class="btn ">确认审批</button>
+		</div>	
+	</script>
+	<div class="selecta">
+	</div>
+	<script type="text/html" id="selecta">
+		<div class="header">
+			<h2>{{title}}</h2>
+		</div>
+		<ul>
+			{{each dataul as val key}}
+				<li>{{dataul[key].Name}}</li>
+			{{/each}}
+		</ul>
+	</script>
+	<div class="selectb">
+		<div class="header">
+			<h2></h2>
+		</div>
+		<div class="search">
+			<span>搜索:</span><input type="text">
+		</div>
+		
+		<ul>
+			
+		</ul>
+	</div>
+	<script type="text/html" id="selectb">
+		{{each dataul as val key}}
+			<li>{{dataul[key].Name}}</li>
+		{{/each}}
+	</script>
+	<div class="MultipleSelect2c">
+		<div class="header">
+			<h2></h2>
+		</div>
+		<div class="search">
+			<span>搜索:</span><input type="text">
+		</div>
+		
+		<ul>
+			
+		</ul>
+	</div>
+	<script type="text/html" id="MultipleSelect2c">
+		<div class="header">
+			<h2>{{title}}</h2>
+		</div>
+		<div class="search">
+			<span>搜索:</span><input type="text">
+		</div>
+		
+		<ul>
+			{{each dataul as val key}}
+				<li>{{dataul[key].Name}}</li>
+			{{/each}}
+		</ul>
+	</script>
+
+	
+
+	<div class="loading">
+		<div class="loader-inner square-spin">
+			<div></div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+html, body {
+  height: 100%;
+  background: #f2f2f2;
+}
+
+.bort {
+  border-top: 1px solid #ccc;
+}
+
+.top {
+  background: white;
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+.top .pic {
+  width: 15%;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-left: 15px;
+}
+.top .pic img {
+  width: 100%;
+  display: block;
+}
+.top .name {
+  flex: 1;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.center {
+  background: white;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  border-bottom: 1px solid #ccc;
+  font-size: 16px;
+}
+.center .left {
+  width: 100px;
+  padding-left: 15px;
+}
+.center .right {
+  flex: 1;
+  text-align: right;
+  padding-right: 15px;
+}
+
+.btn {
+  width: 90%;
+  margin: 15px auto 0;
+  display: block;
+  height: 54px;
+  border: none;
+  background: #5cadec;
+  border-radius: 27px;
+  font-size: 20px;
+  color: #f1f6fb;
+  outline: none;
+}

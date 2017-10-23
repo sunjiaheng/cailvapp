@@ -1,0 +1,59 @@
+html, body {
+  height: 100%;
+  background: #f2f2f2;
+}
+
+.title {
+  height: 30px;
+  line-height: 30px;
+  text-indent: 10px;
+  background: white;
+}
+.title i {
+  font-size: 20px;
+  padding-right: 5px;
+}
+
+.list {
+  background: white;
+}
+.list li {
+  border-top: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+}
+.list li .left {
+  flex: 1;
+  padding-left: 15px;
+}
+.list li .left .place {
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+}
+.list li .left .time {
+  height: 20px;
+  line-height: 20px;
+  padding-bottom: 10px;
+  font-size: 16px;
+}
+.list li .right {
+  width: 50px;
+  padding-right: 15px;
+}
+.list li .right i {
+  font-size: 40px;
+}
+
+button {
+  width: 90%;
+  margin: 15px auto;
+  display: block;
+  height: 54px;
+  border: none;
+  background: #5cadec;
+  border-radius: 27px;
+  font-size: 20px;
+  color: #f1f6fb;
+  outline: none;
+}
