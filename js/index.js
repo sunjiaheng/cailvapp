@@ -76,7 +76,9 @@
 var address = "http://192.168.1.202:8084/";//服务器地址
 
 $(function(){
+    $(".home .header2 span").html($(window).width())
     //判断是否登录
+    // localStorage.clear()
     if(localStorage.getItem("UserID")){
         //加载发现存在用户，加载用户界面
         var temuser= template('user', {
@@ -90,6 +92,9 @@ $(function(){
         // 必须的数据
         GetMyApplyList();//获取apply list
         GetMyApproveList();//获取MyApproveList
+        GetInvoiceList()
+        //禁用4个按钮是否可用
+        ableinput()
     }
     else{
         $(".home").toLeft({"div":$(".login")})
@@ -123,6 +128,7 @@ $(function(){
             var times = 5;
             $this.html(times+"s");
             var sendTime = setInterval(function(){
+
                 times--
                 if(times == 0){
                     clearInterval(sendTime)
@@ -139,12 +145,12 @@ $(function(){
     })
     //发送ajax验证验证码
     $(".PhoneCheck .test").click(function(){
-        $(".PhoneCheck").toLeft({"div":$(".ResetPassword"),"ajax":function(){
-            setTimeout(function(){
-                console.log("短信验证成功")
-                $(".loading").hide();
-            },1000)
-        }})
+        $(".PhoneCheck").toLeft({"div":$(".ResetPassword")})
+        setTimeout(function(){
+            console.log("短信验证成功")
+            $(".loading").hide();
+        },1000)
+        
     })
 
 
@@ -219,7 +225,11 @@ $(function(){
         $(".details").attr("work_state_code",$(this).attr("work_state_code"))
 
 
-        FormBuilding($(this).attr("workFlowNodeId"),$(this).attr("taskId"),$(this).attr("travelId"))
+        FormBuilding($(this).attr("workFlowNodeId"),$(this).attr("businessId"),$(this).attr("travelId"))
+        localStorage.setItem(
+            "shenqing_work_state_code",
+            $(this).attr("work_state_code")==0?false: true
+        )
     })
     $(".details").on("click",".icon-houtui",function(){
         $(".details").toRight({"div":$(".MyApply")})
@@ -249,8 +259,12 @@ $(function(){
         $(".details2").attr("travelId",$(this).attr("travelId"))
         $(".details2").attr("BusinessId",$(this).attr("BusinessId"))
         $(".details2").attr("work_state_code",$(this).attr("work_state_code"))
+        localStorage.setItem(
+            "shenpi_work_state_code",
+            $(this).attr("work_state_code")
+            )
         
-        FormBuilding2($(this).attr("workFlowNodeId"),$(this).attr("taskId"),$(this).attr("travelId"))
+        FormBuilding2($(this).attr("workFlowNodeId"),$(this).attr("businessId"),$(this).attr("travelId"),$(this).attr("work_state_code"))
     })
     $(".details2").on("click",".icon-houtui",function(){
         $(".details2").toRight({"div":$(".MyRatify")})
@@ -472,10 +486,17 @@ function login(){
             $(".loading").hide()
            
             if(data.Success){
+                localStorage.setItem("shenqing_work_state_code",true)
+                localStorage.setItem("shenpi_work_state_code",true)
                 localStorage.setItem("token",data.Result[0]);
                 for(var key in data.Result[1]){
                      localStorage.setItem(key,data.Result[1][key]);
                 }
+                localStorage.setItem("MenuRoles",JSON.stringify(data.Result[1].MenuRoles))
+                //禁用4个按钮是否可用
+                ableinput()
+
+                
 
                 $(".login").toRight({'div':$(".home")});
 
@@ -491,6 +512,7 @@ function login(){
                 //登录成请求两个红点数据
                 GetMyApplyList();//获取apply list
                 GetMyApproveList();//获取MyApproveList
+                GetInvoiceList()
             }
             else{
 
@@ -509,9 +531,10 @@ function GetMyApplyList(){
         dataType: 'json',
         data: {"userId":localStorage.getItem("UserID")},
         beforeSend:function(){
-
+            $(".loading").show()
         },
         success: function (data) {
+            $(".loading").hide()
             if(data.Result[0].length>0){
                 console.log(data.Result[0].length)
                 $(".home .wode .circle").css({"display":"block"}).html(data.Result[0].length)
@@ -546,9 +569,10 @@ function GetMyApproveList(){
         dataType: 'json',
         data: {"userId":localStorage.getItem("UserID")},
         beforeSend:function(){
-
+            $(".loading").show()
         },
         success: function (data) {
+            $(".loading").hide()
             if(data.Result[0].length>0){
                 $(".home .shenpi .circle").css({"display":"block"}).html(data.Result[0].length)
                 // $(".home").find(".shenpi1").addClass("shenpi").removeClass("shenpi1")
@@ -572,16 +596,18 @@ function GetMyApproveList(){
         }
     });
 }
-function FormBuilding(workFlowNodeId,taskId,travelId){
+function FormBuilding(workFlowNodeId,businessId,travelId){
+    
     $.ajax({
         url: address + 'api/Form/FormBuilding',
         type: 'get',
         dataType: 'json',
         data: {
             "userId":localStorage.getItem("UserID"),
-            "workFlowNodeId":0 ,
-            "taskId":taskId,
-            "travelId":travelId 
+            "workFlowNodeId":workFlowNodeId,
+            "businessId":businessId,
+            "travelId":travelId
+            
         },
         beforeSend:function(){
             $(".loading").show()
@@ -624,10 +650,11 @@ function FormBuilding(workFlowNodeId,taskId,travelId){
                 work_state_code:$(".details").attr("work_state_code"),
                 feijidata:fjdata,
                 jiudiandata:zcdata,
-                zhuanchedata:jddata
+                zhuanchedata:jddata,
+                shenqing_work_state_code:localStorage.getItem("shenqing_work_state_code")
             };
-            console.log(TravelApplyData.feijidata)
-            
+           
+            console.log(TravelApplyData)
             if(workFlowNodeId){
                 var html = template("details", TravelApplyData);
                 $(".details").html(html)
@@ -646,7 +673,8 @@ function FormBuilding(workFlowNodeId,taskId,travelId){
     });
 
 }
-function FormBuilding2(workFlowNodeId,taskId,travelId){
+function FormBuilding2(workFlowNodeId,businessId,travelId,work_state_code){
+    console.log(work_state_code)
     $.ajax({
         url: address + 'api/Form/FormBuilding',
         type: 'get',
@@ -654,9 +682,11 @@ function FormBuilding2(workFlowNodeId,taskId,travelId){
         data: {
             "userId":localStorage.getItem("UserID"),
             "workFlowNodeId":workFlowNodeId ,
-            "taskId":taskId,
-            "travelId":travelId 
+            "businessId":businessId,
+            "travelId":travelId
+            
         },
+
         beforeSend:function(){
             $(".loading").show()
         },
@@ -676,7 +706,8 @@ function FormBuilding2(workFlowNodeId,taskId,travelId){
                 FormBuildingdata:data.Result[0][0].Forms[0].FormElements,
                 TravelApplyName:localStorage.getItem("EmployeeName"),
                 WorkFlowNodeId:data.Result[0][0].WorkFlowNodeId,
-                work_state_code:$(".details").attr("work_state_code")
+                work_state_code:$(".details").attr("work_state_code"),
+                shenpi_work_state_code:localStorage.getItem("shenpi_work_state_code")
             };
 
             var html = template("details2", TravelApplyData);
@@ -702,7 +733,16 @@ function GetInvoiceList(){
         },
         success: function (data) {
             $(".loading").hide()
-            console.log(data.Result[0])
+           
+            // $(".home .baoxiao .circle").html(data.Result.size())
+            if(data.Result[0].length>0){
+                $(".home .baoxiao .circle").css({"display":"block"}).html(data.Result[0].length)
+                // $(".home").find(".shenpi1").addClass("shenpi").removeClass("shenpi1")
+            }
+            else{
+                $(".home .baoxiao .circle").css({"display":"none"})
+                // $(".home").find(".shenpi").addClass("shenpi1").removeClass("shenpi")
+            }
             var ExpenseApplyDate = {
                 "ExpenseApplyDatelist":data.Result[0]
             }
@@ -779,16 +819,25 @@ function UserSubmitNewOrUpdateTaskByNodeId(page,taskId){
     
     for(var i=0;i<$right.size();i++){
         var key = $right.eq(i).attr("tablename")+"."+$right.eq(i).attr("columnname")
-       console.log(key)
+       // console.log(key)
         if($right.eq(i).parent().attr("class") == 'Code_CCMDDS Select2' || $right.eq(i).parent().attr("class") == 'Code_CCMDD Select2'){
             var x = $right.eq(i).html().indexOf(" ")
-            var value = $right.eq(i).html().substring(0,x)
-            console.log(value)
+            if(x>0){
+                var value = $right.eq(i).html().substring(0,x)
+            }
+            else{
+                var value = $right.eq(i).html()
+            }
+           
+            
         }
         else if($right.eq(i).parent().hasClass('Select')){
+            
             var classN = $right.eq(i).parent().attr("class").indexOf(" ")
             var arr = JSON.parse(localStorage.getItem($right.eq(i).parent().attr("class").substring(0,classN)))
+            console.log(arr)
             for(var x=0;x<arr.length;x++){
+                console.log(arr[x].Name == $right.eq(i).html())
                 if(arr[x].Name == $right.eq(i).html()){
                     var value = arr[x].Value
                 }
@@ -853,11 +902,29 @@ function CreateAnonymousNewTaskByStartNode(){
         },
         success: function (data) {
             $(".loading").hide()
-            console.log(data)
+            
+            $(".ExpenseApply").toRight({"div":$(".home")})
            
         },
         error: function (jqXHR, textStatus, err) {
             
         }
     })
+}
+//禁用4个按钮是否可用
+function ableinput(){
+    var data = JSON.parse(localStorage.getItem("MenuRoles"))
+    console.log(data)
+    if(!data[0]){
+        $(".chucai").addClass("chucaidisable").removeClass("chucai")
+    }
+    if(!data[1]){
+        $(".baoxiao").addClass("baoxiaodisable").removeClass("baoxiao")
+    }
+    if(!data[2]){
+        $(".wode").addClass("wodedisable").removeClass("wode")
+    }
+    if(!data[3]){
+        $(".shenpi").addClass("shenpidisable").removeClass("shenpi")
+    }
 }

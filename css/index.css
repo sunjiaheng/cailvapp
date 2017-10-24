@@ -4,7 +4,7 @@
 .home .header2 a { position: absolute; right: 20px; top: 0; color: white; font-size: 20px; }
 .home .header2 span { position: absolute; left: 20px; top: 0; color: white; font-size: 16px; }
 .home .main { width: 90%; margin: 0 auto; display: flex; justify-content: space-between; margin-top: 30px; }
-.home .main .wode1, .home .main .shenpi1 { background: #9edacb; }
+.home .main .chucaidisable, .home .main .baoxiaodisable, .home .main .wodedisable, .home .main .shenpidisable { background: #ccc !important; }
 .home .main div { width: 45%; background: #eff8fd; text-align: center; display: block; border-radius: 5px; }
 .home .main div i { font-size: 50px; color: #5cadec; position: relative; display: block; margin-top: 30px; }
 .home .main div i .circle { display: none; width: 26px; height: 26px; text-align: center; line-height: 26px; border-radius: 50%; background: red; position: absolute; left: 50%; margin-left: 12px; top: -12px; font-size: 16px; color: white; }
@@ -98,6 +98,8 @@
 .MyApply .box .list1 li .right i, .MyApply .box .list2 li .right i, .MyRatify .box .list1 li .right i, .MyRatify .box .list2 li .right i { font-size: 24px; }
 .MyApply .box .active, .MyRatify .box .active { display: block; }
 
+body > div { height: 100%; overflow: auto; overflow-scrolling: touch; -webkit-overflow-scrolling: touch; }
+
 .TravelApply, .details, .details2 { height: 100%; background: #f2f2f2; overflow: auto; }
 .TravelApply .bort, .details .bort, .details2 .bort { border-top: 1px solid #ccc; }
 .TravelApply .applyname, .details .applyname, .details2 .applyname { background: white; display: flex; align-items: center; border-bottom: 1px solid #ccc; height: 60px; }
@@ -108,6 +110,7 @@
 .TravelApply .travelpersoninfo > div, .details .travelpersoninfo > div, .details2 .travelpersoninfo > div { display: flex; align-items: center; padding: 4px 0; justify-content: space-between; border-bottom: 1px solid #ccc; }
 .TravelApply .travelpersoninfo > div .left, .details .travelpersoninfo > div .left, .details2 .travelpersoninfo > div .left { width: 150px; font-size: 16px; padding-left: 15px; }
 .TravelApply .travelpersoninfo > div div.right, .details .travelpersoninfo > div div.right, .details2 .travelpersoninfo > div div.right { min-height: 50px; }
+.TravelApply .travelpersoninfo > div > .disabled, .details .travelpersoninfo > div > .disabled, .details2 .travelpersoninfo > div > .disabled { background: #ccc; margin-right: 15px; padding-right: 0px !important; height: 39px; line-height: 39px; min-height: 39px !important; text-indent: 5px; color: #545454; }
 .TravelApply .travelpersoninfo > div .right, .details .travelpersoninfo > div .right, .details2 .travelpersoninfo > div .right { flex: 1; padding-right: 15px; display: flex; flex-wrap: wrap; align-items: center; }
 .TravelApply .travelpersoninfo > div .right > label, .details .travelpersoninfo > div .right > label, .details2 .travelpersoninfo > div .right > label { display: flex; align-items: center; }
 .TravelApply .travelpersoninfo > div .right input, .details .travelpersoninfo > div .right input, .details2 .travelpersoninfo > div .right input { border: 1px solid #ccc; outline: none; margin-top: 5px; height: 35px; text-indent: 5px; flex: 1; font-size: 14px; }
@@ -149,5 +152,10 @@
 .selectb ul li, .MultipleSelect2c ul li { height: 40px; line-height: 40px; font-size: 20px; text-indent: 15px; border-bottom: 1px solid #ccc; }
 
 .loading { z-index: 100; display: none; }
+
+body { -webkit-transform: translateZ(0); transform: translateZ(0); }
+
+@media screen and (max-width: 360px) { .left { width: 110px !important; font-size: 12px !important; }
+  .right { font-size: 12px !important; } }
 
 /*# sourceMappingURL=index.css.map */

@@ -62,9 +62,10 @@ body>div{
 
 /*animate.css动画 提取  要做webkit兼容*/
 .animated {
-  animation-duration: 0.5s;
+  animation-duration: 1s;
   animation-fill-mode: both;
-  -webkit-animation-duration: 0.5s;
+
+  -webkit-animation-duration: 1s;
   -webkit-animation-fill-mode: both;
 }
 /*webkit兼容*/
@@ -85,7 +86,7 @@ body>div{
 @-webkit-keyframes fadeInRightBig {
   from {
     opacity: 0;
-    -webkit-transform: -webkit-translate3d(2000px, 0, 0);
+    -webkit-transform:translate3d(2000px, 0, 0);
   }
 
   to {
@@ -96,6 +97,7 @@ body>div{
 
 .fadeInRightBig {
 	animation-name: fadeInRightBig;
+
 	-webkit-animation-name: fadeInRightBig;
 }
 
@@ -115,7 +117,7 @@ body>div{
 @-webkit-keyframes fadeInLeftBig {
   from {
     opacity: 0;
-    -webkit-transform: -webkit-translate3d(-2000px, 0, 0);
+    -webkit-transform: translate3d(-2000px, 0, 0);
   }
 
   to {
@@ -126,7 +128,8 @@ body>div{
 
 .fadeInLeftBig {
 	animation-name: fadeInLeftBig;
-    -webkit-animation-name: fadeInLeftBig;
+
+  -webkit-animation-name: fadeInLeftBig;
 }
 
 
