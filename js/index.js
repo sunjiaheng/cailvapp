@@ -49,6 +49,7 @@
                         //登录成请求两个红点数据
                         GetMyApplyList();//获取apply list
                         GetMyApproveList();//获取MyApproveList
+                        GetInvoiceList()
                     }
                 });
                 
@@ -73,16 +74,16 @@
 
 })(jQuery);
 
-var address = "http://192.168.1.202:8084/";//服务器地址
+var address = "http://192.168.1.202:8085/";//服务器地址
 
 $(function(){
-    $(".home .header2 span").html($(window).width())
+    // $(".home .header2 span").html($(window).width())//查看屏幕宽度
     //判断是否登录
     // localStorage.clear()
-    if(localStorage.getItem("UserID")){
+    if(localStorage.getItem("EmployeeId")){
         //加载发现存在用户，加载用户界面
         var temuser= template('user', {
-            pic:address + localStorage.getItem("PersonalPhoto"),
+            pic:localStorage.getItem("PersonalPhoto"),
             name:localStorage.getItem("EmployeeName"),
             yuangonghao:localStorage.getItem("EmployeeId"),
             bumen:localStorage.getItem("Department"),
@@ -94,7 +95,10 @@ $(function(){
         GetMyApproveList();//获取MyApproveList
         GetInvoiceList()
         //禁用4个按钮是否可用
-        ableinput()
+        setTimeout(function(){
+            ableinput()
+        },500)
+        
     }
     else{
         $(".home").toLeft({"div":$(".login")})
@@ -122,22 +126,25 @@ $(function(){
     var sendOnoff = true;
     $(".PhoneCheck .send").click(function(){
         if(sendOnoff){
+            sendPhoneCheck($(".PhoneCheck .tel input").val())//发送验证码
+
             sendOnoff = false;
             var $this = $(this);
             $this.removeClass("send").addClass("send2");
-            var times = 5;
+            var times = 5;//倒计时时间
             $this.html(times+"s");
             var sendTime = setInterval(function(){
-
                 times--
                 if(times == 0){
                     clearInterval(sendTime)
                     $this.addClass("send").removeClass("send2")
                     sendOnoff = true
                     $this.html("发送验证码");
+                    $(".PhoneCheck .tel input").removeAttr('disabled')
                 }
                 else{
                     $this.html(times+"s");
+                    $(".PhoneCheck .tel input").attr("disabled","disabled")
                 }
                 
             },1000)
@@ -145,11 +152,10 @@ $(function(){
     })
     //发送ajax验证验证码
     $(".PhoneCheck .test").click(function(){
-        $(".PhoneCheck").toLeft({"div":$(".ResetPassword")})
-        setTimeout(function(){
-            console.log("短信验证成功")
-            $(".loading").hide();
-        },1000)
+        var phone = $(".PhoneCheck .tel input").val();
+        var msgID = localStorage.getItem('msgID');
+        var verifyCode = $(".PhoneCheck .textnum").val();
+        phoneCheck(phone,verifyCode,msgID)
         
     })
 
@@ -158,12 +164,8 @@ $(function(){
         $(".ResetPassword").toRight({"div":$(".PhoneCheck")})
     })
     $(".ResetPassword .test").click(function(){
-        $(".ResetPassword").toRight({"div":$(".login"),"ajax":function(){
-            setTimeout(function(){
-                console.log("重置密码成功！")
-                $(".loading").hide();
-            },1000)
-        }})
+        ResetPassword(localStorage.getItem("UserID"),$(".ResetPassword .textnum").val())
+       
     })
 
 
@@ -173,8 +175,7 @@ $(function(){
     });
     //退出登录
     $(".user").on("click",".btn",function(){
-        localStorage.clear();
-        $(".user").toRight({"div":$(".login")})
+        Logout()
     })
     //重置密码
     $(".user").on("click",".chongzhimima",function(){
@@ -235,8 +236,44 @@ $(function(){
         $(".details").toRight({"div":$(".MyApply")})
     })
     $(".details").on("click",".btn2",function() {
-        console.log("确认！")
-        UserSubmitNewOrUpdateTaskByNodeId($(".details"),$(".details").attr("taskid"))
+        var fasong = true;
+        $(".details").find(".true").each(function(){
+            if($(this).html().indexOf("<input")>0){
+                if($(this).find("input").val().length!=0){
+                    // console.log("yes1:"+ $(this).parent().attr("class"))
+
+                }
+                else{
+                    // console.log("no1:"+ $(this).parent().attr("class"))
+                    fasong = false
+                }
+            }
+            else if($(this).html().indexOf("<textarea")>0){
+                if($(this).find("textarea").html().length!=0){
+                    // console.log("yes2:"+ $(this).parent().attr("class"))
+                }
+                else{
+                    // console.log("no2:"+ $(this).parent().attr("class"))
+                    fasong = false
+                }
+            }
+            else{
+                if($(this).html().length!=0){
+                    // console.log("yes3:"+ $(this).parent().attr("class"))
+                }
+                else{
+                    // console.log("no3:"+ $(this).parent().attr("class"))
+                    fasong = false 
+                }
+            } 
+        })
+        if(fasong){
+            UserSubmitNewOrUpdateTaskByNodeId($(".details"),$(".details").attr("taskid"))
+        }
+        else{
+            errorInfo("信息请填写完整")
+        }
+        
     })
 
 
@@ -270,8 +307,44 @@ $(function(){
         $(".details2").toRight({"div":$(".MyRatify")})
     })
     $(".details2").on("click",".btn",function() {
-        console.log("审批！")
-        UserSubmitNewOrUpdateTaskByNodeId($(".details2"),$(".details2").attr("taskid"))
+        // console.log("审批！")
+        var fasong = true;
+        $(".details2").find(".true").each(function(){
+            if($(this).html().indexOf("<input")>0){
+                if($(this).find("input").val().length!=0){
+                    // console.log("yes1:"+ $(this).parent().attr("class"))
+                }
+                else{
+                    // console.log("no1:"+ $(this).parent().attr("class"))
+                    fasong = false
+                }
+            }
+            else if($(this).html().indexOf("<textarea")>0){
+                if($(this).find("textarea").html().length!=0){
+                    // console.log("yes2:"+ $(this).parent().attr("class"))
+                }
+                else{
+                    // console.log("no2:"+ $(this).parent().attr("class"))
+                    fasong = false
+                }
+            }
+            else{
+                if($(this).html().length!=0){
+                    // console.log("yes3:"+ $(this).parent().attr("class"))
+                }
+                else{
+                    // console.log("no3:"+ $(this).parent().attr("class"))
+                    fasong = false 
+                }
+            } 
+        })
+        if(fasong){
+            UserSubmitNewOrUpdateTaskByNodeId($(".details2"),$(".details2").attr("taskid")) 
+        }
+        else{
+            errorInfo("信息请填写完整")
+        }
+        
     })
 
 
@@ -297,8 +370,44 @@ $(function(){
     });
 
     $(".TravelApply").on("click",".btn",function() {
-        console.log("提交！")
-        UserSubmitNewOrUpdateTaskByNodeId($(".TravelApply"))
+        var fasong = true;
+        $(".TravelApply").find(".true").each(function(){
+            if($(this).html().indexOf("<input")>0){
+                if($(this).find("input").val().length!=0){
+                    // console.log("yes1:"+ $(this).parent().attr("class"))
+                }
+                else{
+                    // console.log("no1:"+ $(this).parent().attr("class"))
+                    fasong = false
+                }
+            }
+            else if($(this).html().indexOf("<textarea")>0){
+                if($(this).find("textarea").html().length!=0){
+                    // console.log("yes2:"+ $(this).parent().attr("class"))
+                }
+                else{
+                    // console.log("no2:"+ $(this).parent().attr("class"))
+                    fasong = false
+                }
+            }
+            else{
+                if($(this).html().length!=0){
+                    // console.log("yes3:"+ $(this).parent().attr("class"))
+                }
+                else{
+                    // console.log("no3:"+ $(this).parent().attr("class"))
+                    fasong = false 
+                }
+            } 
+        })
+        if(fasong){
+            UserSubmitNewOrUpdateTaskByNodeId($(".TravelApply"))   
+        }
+        else{
+            console.log("error")
+            errorInfo("信息请填写完整")
+        }
+       
     })
     
 
@@ -437,8 +546,14 @@ $(function(){
         if($(".TravelApply").find(".Code_CCQSRQ input").val() != ""){
             Code_CCQSRQ = new Date($(".TravelApply").find(".Code_CCQSRQ input").val())
         }
+        else{
+            $(".TravelApply").find(".Code_CCZTS .right input").val("")
+        }
         if($(".TravelApply").find(".Code_CCJSRQ input").val() != ""){
             Code_CCJSRQ = new Date($(".TravelApply").find(".Code_CCJSRQ input").val())
+        }
+        else{
+            $(".TravelApply").find(".Code_CCZTS .right input").val("")
         }
         if($(".TravelApply").find(".Code_CCQSRQ input").val() != ""
             &&$(".TravelApply").find(".Code_CCJSRQ input").val() != ""){
@@ -452,11 +567,17 @@ $(function(){
         
     })
     $(".TravelApply").on("blur",".Code_CCJSRQ input",function(){
-       if($(".TravelApply").find(".Code_CCQSRQ input").val() != ""){
+        if($(".TravelApply").find(".Code_CCQSRQ input").val() != ""){
             Code_CCQSRQ = new Date($(".TravelApply").find(".Code_CCQSRQ input").val())
+        }
+        else{
+            $(".TravelApply").find(".Code_CCZTS .right input").val("")
         }
         if($(".TravelApply").find(".Code_CCJSRQ input").val() != ""){
             Code_CCJSRQ = new Date($(".TravelApply").find(".Code_CCJSRQ input").val())
+        }
+        else{
+            $(".TravelApply").find(".Code_CCZTS .right input").val("")
         }
         if($(".TravelApply").find(".Code_CCQSRQ input").val() != ""&&$(".TravelApply").find(".Code_CCJSRQ input").val() != ""){
             allDate = Code_CCJSRQ - Code_CCQSRQ;
@@ -490,11 +611,15 @@ function login(){
                 localStorage.setItem("shenpi_work_state_code",true)
                 localStorage.setItem("token",data.Result[0]);
                 for(var key in data.Result[1]){
-                     localStorage.setItem(key,data.Result[1][key]);
+                    localStorage.setItem(key,data.Result[1][key]);
                 }
                 localStorage.setItem("MenuRoles",JSON.stringify(data.Result[1].MenuRoles))
+                localStorage.setItem("telnum",data.Result[2].ServiceCenterHotline)
                 //禁用4个按钮是否可用
-                ableinput()
+                setTimeout(function(){
+                    ableinput()
+                },500)
+                
 
                 
 
@@ -514,8 +639,9 @@ function login(){
                 GetMyApproveList();//获取MyApproveList
                 GetInvoiceList()
             }
-            else{
 
+            else{
+                errorInfo(data.Message)
             }
         },
         error: function (jqXHR, textStatus, err) {
@@ -530,18 +656,21 @@ function GetMyApplyList(){
         type: 'GET',
         dataType: 'json',
         data: {"userId":localStorage.getItem("UserID")},
-        beforeSend:function(){
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + localStorage.getItem("token"));
             $(".loading").show()
         },
         success: function (data) {
             $(".loading").hide()
+            
             if(data.Result[0].length>0){
-                console.log(data.Result[0].length)
-                $(".home .wode .circle").css({"display":"block"}).html(data.Result[0].length)
+                console.log("MyApplyList：" +data.Result[0].length)
+                $(".home .circle").eq(1).css({"display":"block"}).html(data.Result[0].length)
                 // $(".home").find(".wode1").addClass("wode").removeClass("wode1")
             }
             else{
-                $(".home .wode .circle").css({"display":"none"})
+                $(".home .circle").eq(1).css({"display":"none"})
+
                 // $(".home").find(".wode").addClass("wode1").removeClass("wode")
 
             }
@@ -568,17 +697,18 @@ function GetMyApproveList(){
         type: 'GET',
         dataType: 'json',
         data: {"userId":localStorage.getItem("UserID")},
-        beforeSend:function(){
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + localStorage.getItem("token"));
             $(".loading").show()
         },
         success: function (data) {
             $(".loading").hide()
             if(data.Result[0].length>0){
-                $(".home .shenpi .circle").css({"display":"block"}).html(data.Result[0].length)
+                $(".home .circle").eq(2).css({"display":"block"}).html(data.Result[0].length)
                 // $(".home").find(".shenpi1").addClass("shenpi").removeClass("shenpi1")
             }
             else{
-                $(".home .shenpi .circle").css({"display":"none"})
+                $(".home .circle").eq(2).css({"display":"none"})
                 // $(".home").find(".shenpi").addClass("shenpi1").removeClass("shenpi")
             }
             
@@ -586,7 +716,7 @@ function GetMyApproveList(){
                 data0:data.Result[0],
                 data1:data.Result[1]
             };
-            console.log(MyRatifyData)
+            // console.log(MyRatifyData)
 
             var html = template("MyRatify", MyRatifyData);
             $(".MyRatify").html(html)
@@ -609,7 +739,8 @@ function FormBuilding(workFlowNodeId,businessId,travelId){
             "travelId":travelId
             
         },
-        beforeSend:function(){
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + localStorage.getItem("token"));
             $(".loading").show()
         },
         success: function (data) {
@@ -651,7 +782,8 @@ function FormBuilding(workFlowNodeId,businessId,travelId){
                 feijidata:fjdata,
                 jiudiandata:zcdata,
                 zhuanchedata:jddata,
-                shenqing_work_state_code:localStorage.getItem("shenqing_work_state_code")
+                shenqing_work_state_code:localStorage.getItem("shenqing_work_state_code"),
+                telnum:localStorage.getItem("telnum")
             };
            
             console.log(TravelApplyData)
@@ -687,7 +819,8 @@ function FormBuilding2(workFlowNodeId,businessId,travelId,work_state_code){
             
         },
 
-        beforeSend:function(){
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + localStorage.getItem("token"));
             $(".loading").show()
         },
         success: function (data) {
@@ -728,7 +861,8 @@ function GetInvoiceList(){
         data: {
             "userId":localStorage.getItem("UserID"),
         },
-        beforeSend:function(){
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + localStorage.getItem("token"));
             $(".loading").show()
         },
         success: function (data) {
@@ -736,11 +870,11 @@ function GetInvoiceList(){
            
             // $(".home .baoxiao .circle").html(data.Result.size())
             if(data.Result[0].length>0){
-                $(".home .baoxiao .circle").css({"display":"block"}).html(data.Result[0].length)
+                $(".home .circle").eq(0).css({"display":"block"}).html(data.Result[0].length)
                 // $(".home").find(".shenpi1").addClass("shenpi").removeClass("shenpi1")
             }
             else{
-                $(".home .baoxiao .circle").css({"display":"none"})
+                $(".home .circle").eq(0).css({"display":"none"})
                 // $(".home").find(".shenpi").addClass("shenpi1").removeClass("shenpi")
             }
             var ExpenseApplyDate = {
@@ -763,7 +897,8 @@ function GetSubmitUserInfo(userId){
         type: 'POST',
         dataType: 'json',
         data: "=" + userIddata,
-        beforeSend:function(){
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + localStorage.getItem("token"));
             $(".loading").show()
         },
         success: function (data) {
@@ -862,12 +997,13 @@ function UserSubmitNewOrUpdateTaskByNodeId(page,taskId){
             "workFlowNodeId": page.find(".travelpersoninfo").attr("workflownodeid"),
             "UserId": localStorage.getItem("UserID")
         },
-        beforeSend:function(){
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + localStorage.getItem("token"));
             $(".loading").show()
         },
         success: function (data) {
             $(".loading").hide()
-            console.log(data)
+            
             page.toRight({"div":$(".home")})
         },
         error: function (jqXHR, textStatus, err) {
@@ -889,7 +1025,7 @@ function CreateAnonymousNewTaskByStartNode(){
             dataArr.push(dataJson)
         }
     }
-    console.log(dataArr)
+    
     $.ajax({
         url: address + 'api/WorkFlow/CreateAnonymousNewTaskByStartNode',
         type: 'POST',
@@ -897,12 +1033,13 @@ function CreateAnonymousNewTaskByStartNode(){
         contentType: 'application/json',
         data: JSON.stringify(dataArr),
         
-        beforeSend:function(){
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + localStorage.getItem("token"));
             $(".loading").show()
         },
         success: function (data) {
             $(".loading").hide()
-            
+            GetInvoiceList()//
             $(".ExpenseApply").toRight({"div":$(".home")})
            
         },
@@ -913,18 +1050,146 @@ function CreateAnonymousNewTaskByStartNode(){
 }
 //禁用4个按钮是否可用
 function ableinput(){
+   
     var data = JSON.parse(localStorage.getItem("MenuRoles"))
-    console.log(data)
+    console.log(!data[3])
     if(!data[0]){
         $(".chucai").addClass("chucaidisable").removeClass("chucai")
     }
+    else{
+        $(".chucaidisable").addClass("chucai").removeClass("chucaidisable")
+    }
+
     if(!data[1]){
         $(".baoxiao").addClass("baoxiaodisable").removeClass("baoxiao")
     }
+    else{
+        $(".baoxiaodisable").addClass("baoxiao").removeClass("baoxiaodisable")
+    }
+
     if(!data[2]){
         $(".wode").addClass("wodedisable").removeClass("wode")
     }
+    else{
+        $(".wodedisable").addClass("wode").removeClass("wodedisable")
+
+    }
+
     if(!data[3]){
         $(".shenpi").addClass("shenpidisable").removeClass("shenpi")
     }
+    else{
+        $(".shenpidisable").addClass("shenpi").removeClass("shenpidisable")
+
+    }
 }
+//退出登录
+function Logout() {
+
+    $.ajax({
+        url: address + 'api/User/Logout',
+        type: 'POST',
+        dataType: 'json',
+        data: '=' + localStorage.getItem("token"),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + localStorage.getItem("token"));
+            $(".loading").show()
+        },
+        success: function (data) {
+            $(".loading").hide()
+            if(data.Success){
+                localStorage.clear();
+                $(".user").toRight({"div":$(".login")})
+            }
+            else{
+                errorInfo(data.Message)
+            }
+            
+            // $('#token').val("");
+           
+        },
+        error: function (jqXHR, textStatus, err) {
+            alert('NG');
+        }
+    })
+}
+
+function sendPhoneCheck(phone){
+    $.ajax({
+        url: address + 'api/User/SendSMSCode?phoneNo=' + phone,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            
+            if(data.Success){
+                localStorage.setItem("msgID",data.Result)
+                
+            }
+            else{
+                errorInfo(data.Message)
+            }
+            
+        },
+        error: function (jqXHR, textStatus, err) {
+            alert('NG');
+        }
+    })
+}
+
+function phoneCheck(phone,verifyCode,msgID){
+     $.ajax({
+        url: address + 'api/User/VerifySMSCode?phoneNo=' + phone + '&code=' + verifyCode + '&msgID=' + msgID,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+           
+            if(data.Success){
+                localStorage.setItem("UserID",data.Result[0])
+                localStorage.setItem("token",data.Result[1])
+                $(".PhoneCheck").toLeft({"div":$(".ResetPassword")})
+            }
+            else{
+                errorInfo(data.Message)
+            }
+        },
+        error: function (jqXHR, textStatus, err) {
+            alert('NG');
+        }
+    })
+}
+
+function ResetPassword(userId,password){
+    
+    $.ajax({
+        url: address +'api/User/ResetPassword',
+        type: 'POST',
+        dataType: 'json',
+        data: {Id: userId, Password: password,token:localStorage.getItem('token') },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + localStorage.getItem('token'));
+            $(".loading").show()
+        },
+        success: function (data) {
+            $(".loading").hide()
+            if(data.Success){
+                $(".ResetPassword").toRight({"div":$(".login")})
+            }
+            else{
+                errorInfo(data.Message)
+            }
+        },
+        error: function (jqXHR, textStatus, err) {
+            alert('NG');
+        }
+    })
+    
+}
+
+//错误提示
+function errorInfo(info){
+    $(".error").html(info).css({"z-index":200}).show()
+    setTimeout(function(){
+        $(".error").hide(200)
+    },3000)
+}
+

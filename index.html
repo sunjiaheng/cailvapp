@@ -13,7 +13,8 @@
 	<script src="js/jquery-1.12.4.js"></script>
 	<script src="js/index.js"></script>
 	<script src="js/shengshi.js"></script>
-	<script src="js/template.js"></script>
+	<!-- <script src="js/template.js"></script> -->
+	<script src="template/tem.js"></script>
 </head>
 <body>
 	<div class="home">
@@ -113,11 +114,11 @@
 		</div>
 		<div class="main">
 			<div class="tel">
-				<input type="tel" placeholder="请输入手机号">
+				<input type="tel" placeholder="请输入手机号" value="13912340000">
 				<button class="send">发送验证码</button>
 			</div>
 			
-			<input type="text" placeholder="请输入验证码" class="textnum">
+			<input type="text" placeholder="请输入验证码" class="textnum" value="1234">
 			<button class="test">验证</button>
 		</div>
 	</div>
@@ -138,31 +139,29 @@
 					<div class="left">出差人员信息</div>
 					<label><input type="checkbox" name="">本人申请</label>
 				</div>
-				{{each FormBuildingdata as val key}}
+				{{each FormBuildingdata val key}}
 					{{if FormBuildingdata[key].ElementType == "Input"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
-
-								<input type="{{FormBuildingdata[key].ElementType}}" value="{{FormBuildingdata[key].ElementValue}}" {{if FormBuildingdata[key].DataTypeDisable}}disabled class="disabled" {{/if}}>
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								<input type="{{FormBuildingdata[key].ElementType}}" value="{{FormBuildingdata[key].ElementValue}}" {{if FormBuildingdata[key].DataTypeDisable}}disabled class="disabled" {{/if}} >
 							</div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "PwdInput"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="password"></div>
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="password"></div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "Textarea"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><textarea></textarea></div>
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><textarea></textarea></div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "Checkboxs"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
-								{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								{{each FormBuildingdata[key].DataTypeSoure val2 key2}}
 									<label><input type="checkbox">{{FormBuildingdata[key].DataTypeSoure[key2].Name}}</label>
 								{{/each}}
 							</div>
@@ -170,8 +169,8 @@
 					{{else if FormBuildingdata[key].ElementType == "Radio"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
-								{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								{{each FormBuildingdata[key].DataTypeSoure val2 key2}}
 									<label><input type="checkbox" name="{{FormBuildingdata[key].ElementName}}">{{FormBuildingdata[key].DataTypeSoure[key2].Name}}</label>
 								{{/each}}
 							</div>
@@ -183,46 +182,46 @@
 							</div>
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"></div>
+								<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"></div>
 							</div>
 						{{else if  FormBuildingdata[key].ColumnName == "Code_CCMDDS"}}
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"></div>
+								<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"></div>
 							</div>
 						{{else if 1}}
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"></div>
+								<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"></div>
 							</div>
 						{{/if}}
 					{{else if FormBuildingdata[key].ElementType == "Select"}}
-							{{FormBuildingdata[key].DataTypeSoure}}
-						
+							
+	
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"> </div>
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"></div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "Select2"}}
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"> </div>
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"></div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "MultipleSelect2"}}
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"> </div>
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"></div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "DateBox"}} 
 						{{if FormBuildingdata[key].ColumnName == "Code_CCQSRQ"}}
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date"></div>
+								<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date"></div>
 							</div>
 						{{else if FormBuildingdata[key].ColumnName == "Code_CCJSRQ"}}
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date"></div>
+								<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date"></div>
 							</div>
 						{{/if}}
 					{{/if}}
@@ -242,10 +241,10 @@
 			<i class="iconfont icon-lianjie"></i>未报销的出差记录
 		</div>
 		<ul class="list">
-			{{each ExpenseApplyDatelist as val key}}
+			{{each ExpenseApplyDatelist val key}}
 				<li TravelId="{{ExpenseApplyDatelist[key].Code_CCSQLC}}"  workFlowNodeId="{{ExpenseApplyDatelist[key].WorkFlowNodeId}}">
 					<div class="left">
-						<div class="place">{{ExpenseApplyDatelist[key].Code_CCMDD}}至{{ExpenseApplyDatelist[key].Code_CCMDDS}}</div>
+						<div class="place">{{ExpenseApplyDatelist[key].Code_CCMDD}} {{ExpenseApplyDatelist[key].Code_CCMDDS}}</div>
 						<div class="time">
 							<span class="time1">{{ExpenseApplyDatelist[key].Code_CCQSRQ}}</span>/<span class="time2">{{ExpenseApplyDatelist[key].Code_CCJSRQ}}</span>
 						</div>
@@ -271,7 +270,7 @@
 		</ul>
 		<div class="box">
 			<ul class="list1 active">
-				{{each data0 as val key}}
+				{{each data0 val key}}
 					<li taskId="{{data0[key].TaskId}}" workFlowNodeId="{{data0[key].WorkFlowNodeId}}" travelId="{{data0[key].Code_CCSQLC}}" BusinessId = "{{data0[key].BusinessId}}" Work_State_Code="{{data0[key].Work_State_Code}}">
 						<div class="left">
 							<div class="people">
@@ -289,7 +288,7 @@
 				{{/each}}
 			</ul>
 			<ul class="list2">
-				{{each data1 as val key}}
+				{{each data1 val key}}
 					<li taskId="{{data1[key].TaskId}}" workFlowNodeId="{{data1[key].WorkFlowNodeId}}" travelId="{{data1[key].Code_CCSQLC}}"  BusinessId = "{{data1[key].BusinessId}}" Work_State_Code="{{data1[key].Work_State_Code}}">
 						<div class="left">
 							<div class="people">
@@ -310,7 +309,13 @@
 	</script>
 	<div class="details">
 	</div>
+	<script type="text/javascript">
+		template.defaults.imports.timestamp = function(value){
+		    return value.replace(/-/g, "\/")
+		};
+	</script>
 	<script type="text/html" id="details">
+
 		<div class="header">
 			<a class="iconfont icon-houtui"></a>
 			<h2>出差申请详情</h2>
@@ -325,31 +330,31 @@
 					<div class="left">出差人员信息</div>
 					
 				</div>
-				{{each FormBuildingdata as val key}}
+				{{each FormBuildingdata val key}}
 					{{if FormBuildingdata[key].ElementType == "Input"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
-								<input type="{{FormBuildingdata[key].ElementType}}" value="{{FormBuildingdata[key].ElementValue}}" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}>
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								<input type="{{FormBuildingdata[key].ElementType}}" value="{{FormBuildingdata[key].ElementValue}}" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}} >
 							</div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "PwdInput"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
 								<input type="password" value="{{FormBuildingdata[key].ElementValue}} {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}">
 							</div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "Textarea"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}><textarea>{{FormBuildingdata[key].ElementValue}}</textarea></div>
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}><textarea>{{FormBuildingdata[key].ElementValue}}</textarea></div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "Checkboxs"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
-								{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								{{each FormBuildingdata[key].DataTypeSoure val2 key2}}
 									<label><input type="checkbox" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}>{{FormBuildingdata[key].DataTypeSoure[key2].Name}}</label>
 								{{/each}}
 							</div>
@@ -357,8 +362,8 @@
 					{{else if FormBuildingdata[key].ElementType == "Radio"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
-								{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								{{each FormBuildingdata[key].DataTypeSoure val2 key2}}
 									<label><input type="checkbox" name="{{FormBuildingdata[key].ElementName}}" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}>{{FormBuildingdata[key].DataTypeSoure[key2].Name}}</label>
 								{{/each}}
 							</div>
@@ -370,26 +375,26 @@
 							</div>
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled{{/if}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}>{{FormBuildingdata[key].ElementValue}}</div>
+								<div class="right  {{FormBuildingdata[key].DataTypeRequired}} {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled{{/if}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}>{{FormBuildingdata[key].ElementValue}}</div>
 							</div>
 						{{else if  FormBuildingdata[key].ColumnName == "Code_CCMDDS"}}
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled{{/if}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}>{{FormBuildingdata[key].ElementValue}}</div>
+								<div class="right  {{FormBuildingdata[key].DataTypeRequired}} {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled{{/if}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}>{{FormBuildingdata[key].ElementValue}}</div>
 							</div>
 						{{else if 1}}
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled{{/if}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}}</div>
+								<div class="right  {{FormBuildingdata[key].DataTypeRequired}} {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled{{/if}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}}</div>
 							</div>
 						{{/if}}
 					{{else if FormBuildingdata[key].ElementType == "Select"}}
-							{{FormBuildingdata[key].DataTypeSoure}}
+							
 						
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
-							<div class="right {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled{{/if}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"> 
-								{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}
+							<div class="right  {{FormBuildingdata[key].DataTypeRequired}} {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled{{/if}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"> 
+								{{each FormBuildingdata[key].DataTypeSoure val2 key2}}
 									{{if FormBuildingdata[key].DataTypeSoure[key2].Value == FormBuildingdata[key].ElementValue}}
 										{{FormBuildingdata[key].DataTypeSoure[key2].Name}}
 									{{/if}}
@@ -399,34 +404,34 @@
 					{{else if FormBuildingdata[key].ElementType == "Select2"}}
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
-							<div class="right {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled{{/if}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}} </div>
+							<div class="right  {{FormBuildingdata[key].DataTypeRequired}} {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled{{/if}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}} </div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "MultipleSelect2"}}
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
-							<div class="right {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled{{/if}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}} </div>
+							<div class="right  {{FormBuildingdata[key].DataTypeRequired}} {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled{{/if}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}} </div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "DateBox"}} 
 						{{if FormBuildingdata[key].ColumnName == "Code_CCQSRQ"}}
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date" value="{{FormBuildingdata[key].ElementValue}}" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}/></div>
+								<div class="right {{FormBuildingdata[key].DataTypeRequired}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date" value="{{FormBuildingdata[key].ElementValue}}" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}/></div>
 							</div>
 						{{else if FormBuildingdata[key].ColumnName == "Code_CCJSRQ"}}
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date" value="{{FormBuildingdata[key].ElementValue}}" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}/></div>
+								<div class="right {{FormBuildingdata[key].DataTypeRequired}}"  TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date" value="{{FormBuildingdata[key].ElementValue}}" {{if shenqing_work_state_code||FormBuildingdata[key].DataTypeDisable}}disabled class="disabled"{{/if}}/></div>
 							</div>
 						{{/if}}
 					{{/if}}
 				{{/each}}
 			</div>
 			{{if feijidata}}
-				{{each feijidata as val key}}
+				{{each feijidata val key}}
 					<div class="airTicket mt15 bort">
 						<h4 class="iconfont icon-jipiao"><span>机票</span></h4>
 						<div class="info">
-							{{each feijidata[key].FormElements as val2 key2}}
+							{{each feijidata[key].FormElements val2 key2}}
 								{{if feijidata[key].FormElements[key2].ColumnName == "Code_CFJC"}}
 								<h5>
 									{{feijidata[key].FormElements[key2].DataTypeSoure.length?feijidata[key].FormElements[key2].DataTypeSoure[feijidata[key].FormElements[key2].ElementValue]:feijidata[key].FormElements[key2].ElementValue}}
@@ -441,13 +446,13 @@
 								{{if feijidata[key].FormElements[key2].ColumnName == "Code_CFSJ"}}
 								<p class="time">
 									<span>
-										{{feijidata[key].FormElements[key2].DataTypeSoure.length?feijidata[key].FormElements[key2].DataTypeSoure[feijidata[key].FormElements[key2].ElementValue]:feijidata[key].FormElements[key2].ElementValue}}
+										{{feijidata[key].FormElements[key2].DataTypeSoure.length?feijidata[key].FormElements[key2].DataTypeSoure[feijidata[key].FormElements[key2].ElementValue]:feijidata[key].FormElements[key2].ElementValue| timestamp}}
 									</span>
 								</p>
 								{{/if}}
 								{{if feijidata[key].FormElements[key2].ColumnName == "Code_YDHBH"}}
 									<div class="moreInfo">
-										<div class="moreInfoLeft">{{feijidata[key].FormElements[key2].DataTypeSoure.length?feijidata[key].FormElements[key2].DataTypeSoure[feijidata[key].FormElements[key2].ElementValue]:feijidata[key].FormElements[key2].ElementValue}}</div>
+										<div class="moreInfoLeft">{{feijidata[key].FormElements[key2].DataTypeSoure.length?feijidata[key].FormElements[key2].DataTypeSoure[feijidata[key].FormElements[key2].ElementValue]:feijidata[key].FormElements[key2].ElementValue| timestamp}}</div>
 								{{/if}}
 								{{if feijidata[key].FormElements[key2].ColumnName == "Code_ZCLX"}}
 										<div class="moreInfoRight">{{feijidata[key].FormElements[key2].DataTypeSoure.length?feijidata[key].FormElements[key2].DataTypeSoure[feijidata[key].FormElements[key2].ElementValue]:feijidata[key].FormElements[key2].ElementValue}}</div>
@@ -460,11 +465,11 @@
 				{{/each}}
 			{{/if}}
 			{{if jiudiandata}}
-				{{each jiudiandata as val key}}
+				{{each jiudiandata val key}}
 					<div class="hotel mt15 bort">
 						<h4 class="iconfont icon-jiudian"><span>酒店</span></h4>
 						<div class="info">
-							{{each jiudiandata[key].FormElements as val2 key2}}
+							{{each jiudiandata[key].FormElements val2 key2}}
 								{{if jiudiandata[key].FormElements[key2].ColumnName == "Code_JDMC"}}
 									<h5>
 										{{jiudiandata[key].FormElements[key2].DataTypeSoure.length?jiudiandata[key].FormElements[key2].DataTypeSoure[jiudiandata[key].FormElements[key2].ElementValue]:jiudiandata[key].FormElements[key2].ElementValue}}
@@ -472,10 +477,12 @@
 								{{/if}}
 								{{if jiudiandata[key].FormElements[key2].ColumnName == "Code_JDRZSJ"}}
 									<p class="time">
-										<span>{{jiudiandata[key].FormElements[key2].DataTypeSoure.length?jiudiandata[key].FormElements[key2].DataTypeSoure[jiudiandata[key].FormElements[key2].ElementValue]:jiudiandata[key].FormElements[key2].ElementValue}} 至
+										<span>{{jiudiandata[key].FormElements[key2].DataTypeSoure.length?jiudiandata[key].FormElements[key2].DataTypeSoure[jiudiandata[key].FormElements[key2].ElementValue] :jiudiandata[key].FormElements[key2].ElementValue| timestamp}} 至
 								{{/if}}
 								{{if jiudiandata[key].FormElements[key2].ColumnName == "Code_JDLKSJ"}}
-									{{jiudiandata[key].FormElements[key2].DataTypeSoure.length?jiudiandata[key].FormElements[key2].DataTypeSoure[jiudiandata[key].FormElements[key2].ElementValue]:jiudiandata[key].FormElements[key2].ElementValue}}</span>
+									{{jiudiandata[key].FormElements[key2].DataTypeSoure.length?
+									jiudiandata[key].FormElements[key2].DataTypeSoure[jiudiandata[key].FormElements[key2].ElementValue]:
+									jiudiandata[key].FormElements[key2].ElementValue| timestamp}}</span>
 									</p>
 								{{/if}}
 								{{if jiudiandata[key].FormElements[key2].ColumnName == "Code_HJSJ"}}
@@ -495,11 +502,11 @@
 				{{/each}}
 			{{/if}}
 			{{if zhuanchedata}}
-				{{each zhuanchedata as val key}}
+				{{each zhuanchedata val key}}
 					<div class="car mt15 bort">
 						<h4 class="iconfont icon-icon"><span>专车</span></h4>
 						<div class="info">
-							{{each zhuanchedata[key].FormElements as val2 key2}}
+							{{each zhuanchedata[key].FormElements val2 key2}}
 							{{if zhuanchedata[key].FormElements[key2].ColumnName == "Code_CX"}}
 								<h5>
 									{{zhuanchedata[key].FormElements[key2].DataTypeSoure.length?zhuanchedata[key].FormElements[key2].DataTypeSoure[zhuanchedata[key].FormElements[key2].ElementValue]:zhuanchedata[key].FormElements[key2].ElementValue}}
@@ -507,10 +514,10 @@
 							{{/if}}
 							{{if zhuanchedata[key].FormElements[key2].ColumnName == "Code_QSSJ"}}
 								<p class="time">
-									<span>{{zhuanchedata[key].FormElements[key2].DataTypeSoure.length?zhuanchedata[key].FormElements[key2].DataTypeSoure[zhuanchedata[key].FormElements[key2].ElementValue]:zhuanchedata[key].FormElements[key2].ElementValue}} 至
+									<span>{{zhuanchedata[key].FormElements[key2].DataTypeSoure.length?zhuanchedata[key].FormElements[key2].DataTypeSoure[zhuanchedata[key].FormElements[key2].ElementValue]:zhuanchedata[key].FormElements[key2].ElementValue| timestamp}} 至
 							{{/if}}
 							{{if zhuanchedata[key].FormElements[key2].ColumnName == "Code_JSSJ"}}
-								{{zhuanchedata[key].FormElements[key2].DataTypeSoure.length?zhuanchedata[key].FormElements[key2].DataTypeSoure[zhuanchedata[key].FormElements[key2].ElementValue]:zhuanchedata[key].FormElements[key2].ElementValue}}</span>
+								{{zhuanchedata[key].FormElements[key2].DataTypeSoure.length?zhuanchedata[key].FormElements[key2].DataTypeSoure[zhuanchedata[key].FormElements[key2].ElementValue]:zhuanchedata[key].FormElements[key2].ElementValue| timestamp}}</span>
 								</p>
 							{{/if}}
 							{{if zhuanchedata[key].FormElements[key2].ColumnName == "Code_CPH"}}
@@ -529,7 +536,7 @@
 			{{if work_state_code == 4 }}
 			<div class="moreBtn mt15 mb20">
 				<button class="btn2">确认行程</button>
-				<a href="tel:13333333333">一键沟通</a>
+				<a href="tel:{{telnum}}">一键沟通</a>
 			</div>
 			{{else if work_state_code == 1}}
 
@@ -552,7 +559,7 @@
 		</ul>
 		<div class="box">
 			<ul class="list1 active">
-			{{each data0 as val key}}
+			{{each data0 val key}}
 				<li taskId="{{data0[key].TaskId}}" workFlowNodeId="{{data0[key].WorkFlowNodeId}}" travelId="{{data0[key].Code_CCSQLC}}" BusinessId = "{{data0[key].BusinessId}}" Work_State_Code="{{data0[key].Work_State_Code}}">
 					<div class="left">
 						<div class="people">
@@ -570,7 +577,7 @@
 			{{/each}}	
 			</ul>
 			<ul class="list2">
-				{{each data1 as val key}}
+				{{each data1 val key}}
 				<li taskId="{{data1[key].TaskId}}" workFlowNodeId="{{data1[key].WorkFlowNodeId}}" travelId="{{data1[key].Code_CCSQLC}}" BusinessId = "{{data1[key].BusinessId}}" Work_State_Code="{{data1[key].Work_State_Code}}">
 					<div class="left">
 						<div class="people">
@@ -606,29 +613,29 @@
 					<div class="left">出差人员信息</div>
 					
 				</div>
-				{{each FormBuildingdata as val key}}
+				{{each FormBuildingdata val key}}
 					{{if FormBuildingdata[key].ElementType == "Input"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
 								<input type="{{FormBuildingdata[key].ElementType}}" value="{{FormBuildingdata[key].ElementValue}}" disabled class="disabled">
 							</div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "PwdInput"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="password" value="{{FormBuildingdata[key].ElementValue}}" disabled></div>
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="password" value="{{FormBuildingdata[key].ElementValue}}" disabled></div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "Textarea"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}" disabled  class="disabled"><textarea>{{FormBuildingdata[key].ElementValue}}</textarea></div>
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}" disabled  class="disabled"><textarea>{{FormBuildingdata[key].ElementValue}}</textarea></div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "Checkboxs"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
-								{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								{{each FormBuildingdata[key].DataTypeSoure val2 key2}}
 									<label><input type="checkbox" disabled class="disabled">{{FormBuildingdata[key].DataTypeSoure[key2].Name}}</label>
 								{{/each}}
 							</div>
@@ -636,8 +643,8 @@
 					{{else if FormBuildingdata[key].ElementType == "Radio"}} 
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}" >
 							<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-							<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
-								{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}
+							<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								{{each FormBuildingdata[key].DataTypeSoure val2 key2}}
 									<label ><input type="checkbox" name="{{FormBuildingdata[key].ElementName}}" disabled class="disabled">{{FormBuildingdata[key].DataTypeSoure[key2].Name}}</label>
 								{{/each}}
 							</div>
@@ -649,47 +656,45 @@
 							</div>
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right disabled" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}}</div>
+								<div class="right disabled {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}}</div>
 							</div>
 						{{else if  FormBuildingdata[key].ColumnName == "Code_CCMDDS"}}
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right disabled" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}}</div>
+								<div class="right disabled {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}}</div>
 							</div>
 						{{else if 1}}
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right disabled" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
+								<div class="right disabled {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">
 								{{FormBuildingdata[key].ElementValue}}</div>
 							</div>
 						{{/if}}
 					{{else if FormBuildingdata[key].ElementType == "Select"}}
-							{{FormBuildingdata[key].DataTypeSoure}}
-						
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
-							<div class="right disabled" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{each FormBuildingdata[key].DataTypeSoure as val2 key2}}{{if FormBuildingdata[key].DataTypeSoure[key2].Value == FormBuildingdata[key].ElementValue}}{{FormBuildingdata[key].DataTypeSoure[key2].Name}}{{/if}}{{/each}}</div>
+							<div class="right disabled {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{each FormBuildingdata[key].DataTypeSoure val2 key2}}{{if FormBuildingdata[key].DataTypeSoure[key2].Value == FormBuildingdata[key].ElementValue}}{{FormBuildingdata[key].DataTypeSoure[key2].Name}}{{/if}}{{/each}}</div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "Select2"}}
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
-							<div class="right disabled" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}} </div>
+							<div class="right disabled {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}} </div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "MultipleSelect2"}}
 						<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 							<div class="left">{{FormBuildingdata[key].ElementName}} </div>
-							<div class="right disabled" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}} </div>
+							<div class="right disabled {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}">{{FormBuildingdata[key].ElementValue}} </div>
 						</div>
 					{{else if FormBuildingdata[key].ElementType == "DateBox"}} 
 						{{if FormBuildingdata[key].ColumnName == "Code_CCQSRQ"}}
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date" value="{{FormBuildingdata[key].ElementValue}}" disabled  class="disabled"/></div>
+								<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date" value="{{FormBuildingdata[key].ElementValue}}" disabled  class="disabled"/></div>
 							</div>
 						{{else if FormBuildingdata[key].ColumnName == "Code_CCJSRQ"}}
 							<div class="{{FormBuildingdata[key].ColumnName}} {{FormBuildingdata[key].ElementType}}">
 								<div class="left">{{FormBuildingdata[key].ElementName}}</div>
-								<div class="right" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date" value="{{FormBuildingdata[key].ElementValue}}" disabled class="disabled"/></div>
+								<div class="right {{FormBuildingdata[key].DataTypeRequired}}" TableName="{{FormBuildingdata[key].TableName}}" ColumnName="{{FormBuildingdata[key].ColumnName}}"><input type="date" value="{{FormBuildingdata[key].ElementValue}}" disabled class="disabled"/></div>
 							</div>
 						{{/if}}
 					{{/if}}
@@ -708,7 +713,7 @@
 			<h2>{{title}}</h2>
 		</div>
 		<ul>
-			{{each dataul as val key}}
+			{{each dataul val key}}
 				<li>{{dataul[key].Name}}</li>
 			{{/each}}
 		</ul>
@@ -726,7 +731,7 @@
 		</ul>
 	</div>
 	<script type="text/html" id="selectb">
-		{{each dataul as val key}}
+		{{each dataul val key}}
 			<li>{{dataul[key].Name}}</li>
 		{{/each}}
 	</script>
@@ -751,7 +756,7 @@
 		</div>
 		
 		<ul>
-			{{each dataul as val key}}
+			{{each dataul val key}}
 				<li>{{dataul[key].Name}}</li>
 			{{/each}}
 		</ul>
@@ -763,6 +768,9 @@
 		<div class="loader-inner square-spin">
 			<div></div>
 		</div>
+	</div>
+	<div class="error">
+		
 	</div>
 </body>
 </html>
