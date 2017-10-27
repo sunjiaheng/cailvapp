@@ -311,7 +311,17 @@
 	</div>
 	<script type="text/javascript">
 		template.defaults.imports.timestamp = function(value){
-		    return value.replace(/-/g, "\/")
+			var newvalue = value.replace(/-/, "年")
+			newvalue = newvalue.replace(/-/, "月")
+			if(/\s/.test(newvalue)){
+				return newvalue.replace(/\s/, "日 ")
+			}
+			else{
+				return newvalue + "日 "
+			}
+			
+
+		    // return value.replace(/-/g, "\/")
 		};
 	</script>
 	<script type="text/html" id="details">

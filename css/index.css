@@ -100,7 +100,7 @@
 
 body > div { height: 100%; overflow: auto; overflow-scrolling: touch; -webkit-overflow-scrolling: touch; }
 
-body > .error { padding: 5px 8px; background: red; position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%); z-index: 200; width: auto; height: 30px; line-height: 30px; font-size: 20px; border-radius: 5px; display: none; }
+body > .error { padding: 5px 8px; background: #337ab7; border-color: #2e6da4; color: #fff; position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%); z-index: 200; width: auto; height: auto; line-height: 30px; font-size: 20px; border-radius: 5px; display: none; white-space: nowrap; }
 
 .TravelApply, .details, .details2 { height: 100%; background: #f2f2f2; overflow: auto; }
 .TravelApply .bort, .details .bort, .details2 .bort { border-top: 1px solid #ccc; }
@@ -137,8 +137,8 @@ body > .error { padding: 5px 8px; background: red; position: absolute; left: 50%
 .TravelApply .hotel h4 span, .TravelApply .airTicket h4 span, .TravelApply .car h4 span, .details .hotel h4 span, .details .airTicket h4 span, .details .car h4 span, .details2 .hotel h4 span, .details2 .airTicket h4 span, .details2 .car h4 span { padding-left: 5px; }
 .TravelApply .hotel .info, .TravelApply .airTicket .info, .TravelApply .car .info, .details .hotel .info, .details .airTicket .info, .details .car .info, .details2 .hotel .info, .details2 .airTicket .info, .details2 .car .info { border-bottom: 1px solid #ccc; padding-left: 15px; padding-right: 10px; }
 .TravelApply .hotel .info h5, .TravelApply .airTicket .info h5, .TravelApply .car .info h5, .details .hotel .info h5, .details .airTicket .info h5, .details .car .info h5, .details2 .hotel .info h5, .details2 .airTicket .info h5, .details2 .car .info h5 { height: 50px; line-height: 50px; font-size: 20px; }
-.TravelApply .hotel .info p, .TravelApply .airTicket .info p, .TravelApply .car .info p, .details .hotel .info p, .details .airTicket .info p, .details .car .info p, .details2 .hotel .info p, .details2 .airTicket .info p, .details2 .car .info p { height: 40px; line-height: 40px; font-size: 16px; }
-.TravelApply .hotel .info .moreInfo, .TravelApply .airTicket .info .moreInfo, .TravelApply .car .info .moreInfo, .details .hotel .info .moreInfo, .details .airTicket .info .moreInfo, .details .car .info .moreInfo, .details2 .hotel .info .moreInfo, .details2 .airTicket .info .moreInfo, .details2 .car .info .moreInfo { display: flex; justify-content: space-between; height: 40px; line-height: 40px; }
+.TravelApply .hotel .info p, .TravelApply .airTicket .info p, .TravelApply .car .info p, .details .hotel .info p, .details .airTicket .info p, .details .car .info p, .details2 .hotel .info p, .details2 .airTicket .info p, .details2 .car .info p { min-height: 40px; height: auto; line-height: 40px; font-size: 16px; }
+.TravelApply .hotel .info .moreInfo, .TravelApply .airTicket .info .moreInfo, .TravelApply .car .info .moreInfo, .details .hotel .info .moreInfo, .details .airTicket .info .moreInfo, .details .car .info .moreInfo, .details2 .hotel .info .moreInfo, .details2 .airTicket .info .moreInfo, .details2 .car .info .moreInfo { display: flex; justify-content: space-between; min-height: 40px; height: auto; line-height: 40px; }
 .TravelApply .moreBtn, .details .moreBtn, .details2 .moreBtn { display: flex; justify-content: space-around; }
 .TravelApply .moreBtn button, .details .moreBtn button, .details2 .moreBtn button { height: 50px; width: 40%; border-radius: 25px; border: none; background: #5cadec; border-radius: 27px; font-size: 18px; color: #f1f6fb; outline: none; }
 .TravelApply .moreBtn a, .details .moreBtn a, .details2 .moreBtn a { height: 50px; line-height: 50px; text-align: center; width: 40%; border-radius: 25px; background: #00cc99; border-radius: 27px; font-size: 18px; color: #f1f6fb; }
